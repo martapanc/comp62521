@@ -48,6 +48,7 @@ class TestAverage(unittest.TestCase):
 
     def test_mode_is_sorted_for_multiple_values(self):
         self.assertEqual(average.mode([2, 2, 1, 1]), [1, 2])
+        self.assertEqual(average.mode([45,12,12,45]), [12, 45])
 
 if __name__ == '__main__':
     unittest.main()

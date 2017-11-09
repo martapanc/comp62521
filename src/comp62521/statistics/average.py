@@ -1,4 +1,3 @@
-
 def mean(X):
     n = len(X)
     if n > 0:
@@ -15,6 +14,7 @@ def median(X):
         return L[n / 2]
     return mean(L[(n / 2) - 1:(n / 2) + 1])
 
+
 def mode(X):
     n = len(X)
     if n == 0:
@@ -22,14 +22,18 @@ def mode(X):
 
     d = {}
     for item in X:
-        if d.has_key(item):
+        if item in d:
             d[item] += 1
         else:
             d[item] = 1
 
     m = (0, 0)
+    k = []
     for key in d.keys():
         if d[key] > m[1]:
             m = (key, d[key])
-
-    return [m[0]]
+            k = [key]
+        elif d[key] == m[1]:
+            m = (key, d[key])
+            k.append(key)
+    return sorted(k)
