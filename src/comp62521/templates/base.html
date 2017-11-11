@@ -21,29 +21,17 @@
 <body>
 <div class="container">
     <div id="page" class="col-md-10">
-        <div id="header">
+        <div id="header" class="col-md-12">
 
             <h1>COMP62521: {{ args.dataset }}</h1>
 
             <div id="navigation">
-                <a href="/">Home*</a>
+                <a class="btn btn-info" href="/">Home</a>
             </div>
         </div>
 
-        <div id="content">
+        <div id="content" class="col-md-12">
             {% block content %}{% endblock %}
-        </div>
-
-
-        <div class="col-md-4">
-            <table class="table table-striped">
-                <tr>
-                    <th>hello</th>
-                </tr>
-                <tr>
-                    <td>world</td>
-                </tr>
-            </table>
         </div>
     </div>
 
