@@ -1,4 +1,5 @@
 from comp62521.statistics import average
+from comp62521.statistics import author_count
 import itertools
 import numpy as np
 from xml.sax import handler, make_parser, SAXException
@@ -49,7 +50,7 @@ class Database:
             parser.parse(infile)
         except SAXException as e:
             valid = False
-            print "Error reading file (" + e.getMessage() + ")"
+            print ("Error reading file (" + e.getMessage() + ")")
         infile.close()
 
         for p in self.publications:
@@ -223,6 +224,21 @@ class Database:
             for i in range(len(astats)) ]
         return (header, data)
 
+    def get_authors_count(self):
+        header = ("Author", "Number of times the author appears first on a paper",
+            "Number of times the author appears last on a paper")
+
+        astats = [ [0, 0] for _ in range(len(self.authors)) ]
+        for p in self.publications:
+            if p.pub_type == 0:
+                for a in p.authors:
+                    astats[a][0] += author_count.appearing_first(a, p.authors)
+                    astats[a][1] += author_count.appearing_last(a, p.authors)
+
+        data = [ [self.authors[i].name] + astats[i]
+            for i in range(len(astats)) ]
+        return (header, data)
+
     def get_average_authors_per_publication_by_year(self, av):
         header = ("Year", "Conference papers",
             "Journals", "Books",
@@ -303,14 +319,14 @@ class Database:
 
     def add_publication(self, pub_type, title, year, authors):
         if year == None or len(authors) == 0:
-            print "Warning: excluding publication due to missing information"
-            print "    Publication type:", PublicationType[pub_type]
-            print "    Title:", title
-            print "    Year:", year
-            print "    Authors:", ",".join(authors)
+            print ("Warning: excluding publication due to missing information")
+            print ("    Publication type:", PublicationType[pub_type])
+            print ("    Title:", title)
+            print ("    Year:", year)
+            print ("    Authors:", ",".join(authors))
             return
         if title == None:
-            print "Warning: adding publication with missing title [ %s %s (%s) ]" % (PublicationType[pub_type], year, ",".join(authors))
+            print ("Warning: adding publication with missing title [ %s %s (%s) ]" % (PublicationType[pub_type], year, ",".join(authors)))
         idlist = []
         for a in authors:
             try:
@@ -323,7 +339,7 @@ class Database:
         self.publications.append(
             Publication(pub_type, title, year, idlist))
         if (len(self.publications) % 100000) == 0:
-            print "Adding publication number %d (number of authors is %d)" % (len(self.publications), len(self.authors))
+            print ("Adding publication number %d (number of authors is %d)" % (len(self.publications), len(self.authors)))
 
         if self.min_year == None or year < self.min_year:
             self.min_year = year
@@ -411,7 +427,7 @@ class DocumentHandler(handler.ContentHandler):
         elif name in DocumentHandler.PUB_TYPE.keys():
             self.db.add_publication(
                 self.pub_type,
-                self.title,
+                self.title, 
                 self.year,
                 self.authors)
             self.clearData()

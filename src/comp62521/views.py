@@ -1,5 +1,5 @@
 from comp62521 import app
-from database import database
+from comp62521.database import database
 from flask import (render_template, request)
 
 def format_data(data):
@@ -117,3 +117,14 @@ def showPublicationSummary(status):
         args["data"] = db.get_author_totals_by_year()
 
     return render_template('statistics_details.html', args=args)
+
+@app.route("/authorcount")
+def showAuthorsCount():
+    dataset = app.config['DATASET']
+    db = app.config['DATABASE']
+    args = {"dataset":dataset, "id":"authors_count"}
+
+    args["title"] = "Authors Count"
+    args["data"] = db.get_authors_count()
+
+    return render_template('authors_count.html', args=args)

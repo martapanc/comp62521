@@ -9,7 +9,7 @@ if len(sys.argv) == 1:
 else:
     data_file = sys.argv[1]
     path, dataset = os.path.split(data_file)
-    print "Database: path=%s name=%s" % (path, dataset)
+    print ("Database: path=%s name=%s" % (path, dataset))
     db = database.Database()
     if db.read(data_file) == False:
         sys.exit(1)

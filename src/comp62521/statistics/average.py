@@ -11,8 +11,8 @@ def median(X):
         return 0
     L = sorted(X)
     if n % 2:
-        return L[n / 2]
-    return mean(L[(n / 2) - 1:(n / 2) + 1])
+        return L[int(n / 2)]
+    return mean(L[int((n / 2) - 1):int((n / 2) + 1)])
 
 
 def mode(X):
