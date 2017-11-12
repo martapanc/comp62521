@@ -187,14 +187,14 @@ class Database:
         ua = alist[0] | alist[1] | alist[2] | alist[3]
 
         data = [
-            ["Number of publications"] + plist + [sum(plist)],
-            ["Number of authors"] + [ len(a) for a in alist ] + [len(ua)] ]
+            ["No. of publications"] + plist + [sum(plist)],
+            ["No. of authors"] + [ len(a) for a in alist ] + [len(ua)] ]
         return (header, data)
 
     def get_average_authors_per_publication_by_author(self, av):
-        header = ("Author", "Number of conference papers",
-            "Number of journals", "Number of books",
-            "Number of book chapers", "All publications")
+        header = ("Author", "No. of conference papers",
+            "No. of journals", "Number of books",
+            "No. of book chapers", "All publications")
 
         astats = [ [[], [], [], []] for _ in range(len(self.authors)) ]
         for p in self.publications:
@@ -211,9 +211,9 @@ class Database:
 
 
     def get_publications_by_author(self):
-        header = ("Author", "Number of conference papers",
-            "Number of journals", "Number of books",
-            "Number of book chapers", "Total")
+        header = ("Author", "No. of conference papers",
+            "No. of journals", "No. of books",
+            "No. of book chapers", "Total")
 
         astats = [ [0, 0, 0, 0] for _ in range(len(self.authors)) ]
         for p in self.publications:
@@ -224,13 +224,15 @@ class Database:
             for i in range(len(astats)) ]
         return (header, data)
 
-    def get_authors_count(self):
-        header = ("Author", "Number of times the author appears first on a paper",
-            "Number of times the author appears last on a paper")
+    def get_authors_count(self, start_year, end_year, pub_type):
+        header = ("Author", "No. of times the author appears first",
+            "No. of times the author appears last")
 
         astats = [ [0, 0] for _ in range(len(self.authors)) ]
         for p in self.publications:
-            if p.pub_type == 0:
+            if ( (start_year == None or p.year >= start_year) and
+                (end_year == None or p.year <= end_year) and
+                (pub_type == 4 or pub_type == p.pub_type) ):
                 for a in p.authors:
                     astats[a][0] += author_count.appearing_first(a, p.authors)
                     astats[a][1] += author_count.appearing_last(a, p.authors)
@@ -300,9 +302,9 @@ class Database:
         return (header, data)
 
     def get_author_totals_by_year(self):
-        header = ("Year", "Number of conference papers",
-            "Number of journals", "Number of books",
-            "Number of book chapers", "Total")
+        header = ("Year", "No. of conference papers",
+            "No. of journals", "No. of books",
+            "No. of book chapers", "Total")
 
         ystats = {}
         for p in self.publications:
@@ -427,7 +429,7 @@ class DocumentHandler(handler.ContentHandler):
         elif name in DocumentHandler.PUB_TYPE.keys():
             self.db.add_publication(
                 self.pub_type,
-                self.title, 
+                self.title,
                 self.year,
                 self.authors)
             self.clearData()

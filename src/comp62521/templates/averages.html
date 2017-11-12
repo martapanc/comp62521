@@ -4,7 +4,7 @@
 <h1>{{ args.title }}</h1>
 {% for table in args.tables %}
 <h2>{{ table.title }}</h2>
-<table class="table table-striped display sorted-table" id="avg-table">
+<table class="table table-striped display" >
   <thead>
     <tr>
       {% for column in table.header %}
@@ -27,10 +27,6 @@
 
 
 <script>
-  //$(document).ready(function() {
-    $('#avg-table').DataTable( {
-        "order": [[ 0, "asc" ]]
-    } );
-  //} );
+  
 </script>
 {% endblock %}
