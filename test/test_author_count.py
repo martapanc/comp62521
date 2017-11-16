@@ -1,6 +1,7 @@
 import unittest
 
 from comp62521.statistics import author_count
+from comp62521.statistics import author_lastname
 
 class TestAverage(unittest.TestCase):
 
