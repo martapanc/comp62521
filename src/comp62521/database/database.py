@@ -1,5 +1,7 @@
 from comp62521.statistics import average
 from comp62521.statistics import author_count
+from comp62521.statistics import author_lastname
+
 import itertools
 import numpy as np
 from xml.sax import handler, make_parser, SAXException
@@ -203,7 +205,7 @@ class Database:
 
         func = Stat.FUNC[av]
 
-        data = [ [self.authors[i].name]
+        data = [ [ author_lastname.get_last_name_first(self.authors[i].name) ]
             + [ func(L) for L in astats[i] ]
             + [ func(list(itertools.chain(*astats[i]))) ]
             for i in range(len(astats)) ]
@@ -220,7 +222,7 @@ class Database:
             for a in p.authors:
                 astats[a][p.pub_type] += 1
 
-        data = [ [self.authors[i].name] + astats[i] + [sum(astats[i])]
+        data = [ [author_lastname.get_last_name_first(self.authors[i].name)] + astats[i] + [sum(astats[i])]
             for i in range(len(astats)) ]
         return (header, data)
 
@@ -237,7 +239,7 @@ class Database:
                     astats[a][0] += author_count.appearing_first(a, p.authors)
                     astats[a][1] += author_count.appearing_last(a, p.authors)
 
-        data = [ [self.authors[i].name] + astats[i]
+        data = [ [ author_lastname.get_last_name_first(self.authors[i].name) ] + astats[i]
             for i in range(len(astats)) ]
         return (header, data)
 
