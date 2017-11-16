@@ -8,6 +8,9 @@ def get_author_last_name(author):
 def get_last_name_first(author):
     author_items = author.split()
     first_names = ","
-    for item in author_items[:-1]:
-        first_names += " " + item
-    return author_items[-1] + first_names
+    if len(author_items) > 1:
+        for item in author_items[:-1]:
+            first_names += " " + item
+        return author_items[-1] + first_names
+    else:
+        return author_items[-1]
