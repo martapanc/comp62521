@@ -27,5 +27,8 @@ class TestAverage(unittest.TestCase):
         self.assertEqual(author_lastname.get_author_last_name("Nostradamus"), "Nostradamus")
         self.assertEqual(author_lastname.get_author_last_name(""), -1)
 
+    def test_author_last_name_first(self):
+        self.assertEqual(author_lastname.get_last_name_first("Alessandro Artale"), "Artale, Alessandro")
+
 if __name__ == '__main__':
     unittest.main()
