@@ -2,7 +2,7 @@ import unittest
 
 from comp62521.statistics import author_count
 
-class TestAverage(unittest.TestCase):
+class TestAuthorCount(unittest.TestCase):
 
     def setUp(self):
         pass
@@ -19,5 +19,12 @@ class TestAverage(unittest.TestCase):
         self.assertEqual(author_count.appearing_last("oguz", ["a", "oguz", "b"]), 0)
         self.assertEqual(author_count.appearing_last("oguz",["a","b","c"]),0)
 
+    def test_sole_author(self):
+        '''self.assertEquals(author_count.appearing_sole("Marta", ["Marta"]), 1)
+        self.assertEquals(author_count.appearing_sole("Marta",["Coco"]),0)'''
+        self.assertEquals(author_count.appearing_sole("Coco",["Marta","oguz","Coco"]),0)
+        self.assertEquals(author_count.appearing_sole("Coco", []), 0)
+        self.assertEquals(author_count.appearing_sole("Coco",["oguz"]),0)
+        '''self.assertEquals(author_count.appearing_sole("Coco",[["Coco"],["Coco"]]),2)'''
 if __name__ == '__main__':
     unittest.main()

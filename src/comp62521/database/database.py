@@ -226,9 +226,9 @@ class Database:
 
     def get_authors_count(self, start_year, end_year, pub_type):
         header = ("Author", "No. of times the author appears first",
-            "No. of times the author appears last")
+            "No. of times the author appears last","No. of times the author appears sole")
 
-        astats = [ [0, 0] for _ in range(len(self.authors)) ]
+        astats = [ [0, 0, 0] for _ in range(len(self.authors)) ]
         for p in self.publications:
             if ( (start_year == None or p.year >= start_year) and
                 (end_year == None or p.year <= end_year) and
@@ -236,7 +236,7 @@ class Database:
                 for a in p.authors:
                     astats[a][0] += author_count.appearing_first(a, p.authors)
                     astats[a][1] += author_count.appearing_last(a, p.authors)
-
+                    astats[a][2] += author_count.appearing_sole(a, p.authors)
         data = [ [self.authors[i].name] + astats[i]
             for i in range(len(astats)) ]
         return (header, data)
