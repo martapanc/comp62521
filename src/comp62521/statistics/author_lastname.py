@@ -14,8 +14,8 @@ def get_last_name_first(author):
                 author_items.remove(item)
         if len(author_items) > 1:
             for item in author_items[:-1]:
-                first_names += " " + item
-            return author_items[-1] + first_names
+                first_names += " " + item.title() #Capitalise first letter
+            return author_items[-1].title() + first_names
         else:
-            return author_items[-1]
+            return author_items[-1].title()
     return -1
