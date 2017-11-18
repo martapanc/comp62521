@@ -241,6 +241,49 @@ class Database:
             for i in range(len(astats)) ]
         return (header, data)
 
+    def get_author_stats(self,author):
+        coauthors = {}
+        papernumber=0
+        journalnumber=0
+        booknumber=0
+        booksnumber=0
+        allpubnumber=0
+        coauthornumber=0
+        fisrt=0
+        last=0
+        astats = [[0, 0, 0, 0, 0, 0, 0, 0] for _ in range(len(self.authors))]
+        # The overall number of publications,papers,articls,book chapters,books
+        # The number of co-authors
+        # The number of times
+        for p in self.publications:
+            for a in p.authors:
+                astats[a][p.pub_type + 1] += 1
+                for a2 in p.authors:
+                    if a != a2:
+                        try:
+                            coauthors[a].add(a2)
+                        except KeyError:
+                            coauthors[a] = set([a2])
+                astats[a][5] = len(coauthors[a])
+                astats[a][6] += author_count.appearing_first(a, p.authors)
+                astats[a][7] += author_count.appearing_last(a, p.authors)
+            for a in p.authors:
+                astats[a][0] = astats[a][1] + astats[a][2] + astats[a][3] + astats[a][4]
+
+        data = [ astats[i]
+                for i in range(len(astats))]
+        for i in range(len(data)):
+            if self.authors[i].name==author:
+                allpubnumber = data[i][0]
+                papernumber = data[i][1]
+                journalnumber = data[i][2]
+                booknumber = data[i][3]
+                booksnumber = data[i][4]
+                coauthornumber = data[i][5]
+                fisrt = data[i][6]
+                last = data[i][7]
+        return (allpubnumber,papernumber,journalnumber,booknumber,booksnumber,coauthornumber,fisrt,last)
+
     def get_average_authors_per_publication_by_year(self, av):
         header = ("Year", "Conference papers",
             "Journals", "Books",

@@ -147,3 +147,22 @@ def showAuthorsCount():
     args["pub_str"] = PUB_TYPES[pub_type]
 
     return render_template('authors_count.html', args=args)
+
+@app.route("/authorstats")
+def showAuthorStats():
+    dataset=app.config['DATASET']
+    db = app.config['DATABASE']
+    args = {"dataset":dataset, "id":"author_stats"}
+    args["title"] = "Stats"
+    author = str(request.args.get("author"))
+    allpubnumber,papernumber, journalnumber, booknumber, booksnumber,coauthornumber,fisrt,last = db.get_author_stats(author)
+    args["author"]=author
+    args["allpubnumber"] = allpubnumber
+    args["papernumber"] = papernumber
+    args["journalnumber"] = journalnumber
+    args["booknumber"] = booknumber
+    args["booksnumber"] = booksnumber
+    args["coauthornumber"] = coauthornumber
+    args["fisrt"] = fisrt
+    args["last"] = last
+    return render_template("author_stats.html", args=args)

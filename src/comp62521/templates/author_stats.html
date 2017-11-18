@@ -3,19 +3,20 @@
 {% block content %}
 
 <h1>{{ args.title }}</h1>
-<form action="/stats" method="get" data-ajax="false" onSubmit="validatefrom(this)">
+<form action="/authorstats" method="get" data-ajax="false" onSubmit="validatefrom(this)">
     Author Name:<br>
     <input type="text" name="author">
     <input type="submit" value="Submit">
     <h3> Stats for {{args.author}} </h3>
-<a>The overall number of publications = {{args.}}</a><br>
-<a>The number of conference papers = {{args.}}</a><br>
-<a>The number of journal articles = {{args.}}</a><br>
-<a>The number of book chapters = {{args.}}</a><br>
-<a>The number of books = {{args.}}</a><br>
-<a>The number of co-authors = {{args.}}</a><br>
-<a>The number of times(overall) an author appears first on a paper = {{args.}}</a><br>
-<a>The number of times(overall) an author appears last on a paper = {{args.}}</a>
+The overall number of publications = {{args.allpubnumber}}<br>
+The number of conference papers = {{args.papernumber}}<br>
+The number of journal articles = {{args.journalnumber}}<br>
+The number of book chapters = {{args.booknumber}}<br>
+The number of books = {{args.booksnumber}}<br>
+The number of co-authors = {{args.coauthornumber}}<br>
+The number times(overall) an author appears first on a paper  = {{args.fisrt}}<br>
+The number times(overall) an author appears last on a paper = {{args.last}}<br>
+
 </form>
 
 
@@ -26,7 +27,7 @@
 //    } );
 //  } );
 function validateForm(from){
-  author = form["author"].value;
+  author = from["author"].value;
 
   if (author == ""){
     alert("Please provide an Author");
