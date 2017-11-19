@@ -147,5 +147,12 @@ class TestDatabase(unittest.TestCase):
         self.assertEqual(data[0][1], 2,
             "incorrect number of authors in result")
 
+    def test_get_authors_count_for_one_author(self):
+        db = database.Database()
+        self.assertTrue(db.read(path.join(self.data_dir, "dblp_curated_sample.xml")))
+        self.assertEqual(db.get_authors_count_for_one_author("Aldo Bongio", 1980, 2013, 4), [2, 2, 0])
+        self.assertEqual(db.get_authors_count_for_one_author("Alon Y. Halevy", 1995, 2008, 1), [10, 16, 6])
+        self.assertEqual(db.get_authors_count_for_one_author("Suzanne M. Embury", 1998, 2005, 3), [1, 1, 0])
+
 if __name__ == '__main__':
     unittest.main()
