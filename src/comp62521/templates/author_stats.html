@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}{{ args.title }}{% endblock %}
+{% block content %}
+
+<h1>{{ args.title }}</h1>
+<form action="/authorstats" method="get" data-ajax="false" onSubmit="validatefrom(this)">
+    Author Name:<br>
+    <input type="text" name="author">
+    <input type="submit" value="Submit">
+    <h3> Stats for {{args.author}} </h3>
+The overall number of publications = {{args.allpubnumber}}<br>
+The number of conference papers = {{args.papernumber}}<br>
+The number of journal articles = {{args.journalnumber}}<br>
+The number of book chapters = {{args.booknumber}}<br>
+The number of books = {{args.booksnumber}}<br>
+The number of co-authors = {{args.coauthornumber}}<br>
+The number times(overall) an author appears first on a paper  = {{args.fisrt}}<br>
+The number times(overall) an author appears last on a paper = {{args.last}}<br>
+
+</form>
+
+
+<script>
+//  $(document).ready(function() {
+//    $('#table1').DataTable( {
+//        "order": [[ 0, "desc" ]]
+//    } );
+//  } );
+function validateForm(from){
+  author = from["author"].value;
+
+  if (author == ""){
+    alert("Please provide an Author");
+    return false;
+  }
+  return true;
+}
+</script>
+
+{% endblock %}

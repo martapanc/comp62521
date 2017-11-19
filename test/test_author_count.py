@@ -3,7 +3,7 @@ import unittest
 from comp62521.statistics import author_count
 from comp62521.statistics import author_lastname
 
-class TestAverage(unittest.TestCase):
+class TestAuthorCount(unittest.TestCase):
 
     def setUp(self):
         pass
@@ -20,6 +20,7 @@ class TestAverage(unittest.TestCase):
         self.assertEqual(author_count.appearing_last("oguz", ["a", "oguz", "b"]), 0)
         self.assertEqual(author_count.appearing_last("oguz",["a","b","c"]),0)
 
+#<<<<<<< HEAD
     def test_author_last_name(self):
         self.assertEqual(author_lastname.get_author_last_name("Alessandro Artale"), "Artale")
         self.assertEqual(author_lastname.get_author_last_name("John H. Watson"), "Watson")
@@ -35,5 +36,14 @@ class TestAverage(unittest.TestCase):
         self.assertEqual(author_lastname.get_last_name_first("Nostradamus"), "Nostradamus")
         self.assertEqual(author_lastname.get_last_name_first(""), -1)
 
+#=======
+    def test_sole_author(self):
+        '''self.assertEquals(author_count.appearing_sole("Marta", ["Marta"]), 1)
+        self.assertEquals(author_count.appearing_sole("Marta",["Coco"]),0)'''
+        self.assertEquals(author_count.appearing_sole("Coco",["Marta","oguz","Coco"]),0)
+        self.assertEquals(author_count.appearing_sole("Coco", []), 0)
+        self.assertEquals(author_count.appearing_sole("Coco",["oguz"]),0)
+        '''self.assertEquals(author_count.appearing_sole("Coco",[["Coco"],["Coco"]]),2)'''
+#>>>>>>> master
 if __name__ == '__main__':
     unittest.main()
