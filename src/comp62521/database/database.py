@@ -243,7 +243,7 @@ class Database:
 #        data = [ [ author_lastname.get_last_name_first(self.authors[i].name) ] + astats[i]
 #=======
                     astats[a][2] += author_count.appearing_sole(a, p.authors)
-        data = [ [self.authors[i].name] + astats[i]
+        data = [ [ author_lastname.get_last_name_first(self.authors[i].name) ] + astats[i]
 #>>>>>>> master
             for i in range(len(astats)) ]
         return (header, data)
