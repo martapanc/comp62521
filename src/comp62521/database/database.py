@@ -226,6 +226,36 @@ class Database:
             for i in range(len(astats)) ]
         return (header, data)
 
+    def get_all_details_of_authors(self):
+        header = ("Author", "Overall no. of publications", "No. of conference papers",
+            "No. of journals", "No. of books",
+            "No. of book chapers", "No. of co-authors", "No. of times appears first", "No. of times appears last", "No. of times appears sole")
+
+        astats = [ [0, 0, 0, 0] for _ in range(len(self.authors)) ]
+        astats2 = [ [0, 0, 0, 0] for _ in range(len(self.authors)) ]
+        coauthors = {}
+        for p in self.publications:
+            for a in p.authors:
+                astats[a][p.pub_type] += 1
+                astats2[a][1] += author_count.appearing_first(a, p.authors)
+                astats2[a][2] += author_count.appearing_last(a, p.authors)
+                astats2[a][3] += author_count.appearing_sole(a, p.authors)
+                for a2 in p.authors:
+                        if a != a2:
+                            try:
+                                coauthors[a].add(a2)
+                            except KeyError:
+                                coauthors[a] = set([a2])
+        for p in self.publications:
+            for a in p.authors:
+                try:
+                    astats2[a][0] = len(coauthors[a])
+                except:
+                    astats2[a][0] = 0
+        data = [ [self.authors[i].name] + [sum(astats[i])] + astats[i] + astats2[i]
+            for i in range(len(astats)) ]
+        return (header, data)
+
     def get_authors_count(self, start_year, end_year, pub_type):
         header = ("Author", "No. of times the author appears first",
             "No. of times the author appears last","No. of times the author appears sole")
@@ -247,6 +277,19 @@ class Database:
 #>>>>>>> master
             for i in range(len(astats)) ]
         return (header, data)
+
+    def get_authors_count_for_one_author(self, author_name, start_year, end_year, pub_type):
+        astats = [0, 0, 0]
+        for p in self.publications:
+            if ( (start_year == None or p.year >= start_year) and
+                (end_year == None or p.year <= end_year) and
+                (pub_type == 4 or pub_type == p.pub_type) ):
+                for a in p.authors:
+                    if a == self.author_idx[author_name]:
+                        astats[0] += author_count.appearing_first(a, p.authors)
+                        astats[1] += author_count.appearing_last(a, p.authors)
+                        astats[2] += author_count.appearing_sole(a, p.authors)
+        return (astats)
 
     def get_author_stats(self,author):
         coauthors = {}

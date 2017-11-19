@@ -116,6 +116,10 @@ def showPublicationSummary(status):
         args["title"] = "Author by Year"
         args["data"] = db.get_author_totals_by_year()
 
+    if (status == "all_details_of_authors"):
+        args["title"] = "All the Details of the Authors"
+        args["data"] = db.get_all_details_of_authors()
+
     return render_template('statistics_details.html', args=args)
 
 @app.route("/authorcount")
