@@ -153,7 +153,7 @@ def showAuthorStats():
     dataset=app.config['DATASET']
     db = app.config['DATABASE']
     args = {"dataset":dataset, "id":"author_stats"}
-    args["title"] = "Stats"
+    args["title"] = "Author Stats"
     author = str(request.args.get("author"))
     allpubnumber,papernumber, journalnumber, booknumber, booksnumber,coauthornumber,fisrt,last = db.get_author_stats(author)
     args["author"]=author
