@@ -1,5 +1,5 @@
 def appearing_first(name, author_list):
-    if name == author_list[0]:
+    if name == author_list[0] and len(author_list) > 1:
         return 1
     return 0
 
@@ -10,8 +10,7 @@ def appearing_first_for_lists(name, list_of_author_list):
     return occurrence
 
 def appearing_last(name, author_list):
-    tmp_len = len(author_list)
-    if name == author_list[-1]:
+    if name == author_list[-1] and len(author_list) > 1:
         return 1
     return 0
 
