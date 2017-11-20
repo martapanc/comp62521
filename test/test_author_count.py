@@ -9,28 +9,27 @@ class TestAuthorCount(unittest.TestCase):
         pass
 
     def test_first_appearance(self):
-        self.assertEqual(author_count.appearing_first("oguz", ["oguz"]), 1)
+        self.assertEqual(author_count.appearing_first("oguz", ["oguz"]), 0)
         self.assertEqual(author_count.appearing_first("oguz", ["oguz", "a"]), 1)
         self.assertEqual(author_count.appearing_first("oguz", ["b", "oguz", "a"]), 0)
         self.assertEqual(author_count.appearing_first("oguz",["a","b","c"]),0)
 
     def test_first_appearance_for_lists(self):
-        self.assertEqual(author_count.appearing_first_for_lists("oguz", [["oguz"], ["oguz", "a"], ["b", "oguz", "a"], ["a","b","c"]]), 2)
+        self.assertEqual(author_count.appearing_first_for_lists("oguz", [["oguz"], ["oguz", "a"], ["b", "oguz", "a"], ["a","b","c"]]), 1)
         self.assertEqual(author_count.appearing_first_for_lists("k", [["oguz"], ["oguz", "a"], ["b", "oguz", "a"], ["a","b","c"]]), 0)
         self.assertEqual(author_count.appearing_first_for_lists("k", [["oguz"], ["k", "oguz", "a"], ["b", "oguz", "a"], ["a","b","c"]]), 1)
 
     def test_last_appearance(self):
-        self.assertEqual(author_count.appearing_last("oguz", ["oguz"]), 1)
+        self.assertEqual(author_count.appearing_last("oguz", ["oguz"]), 0)
         self.assertEqual(author_count.appearing_last("oguz", ["a", "oguz"]), 1)
         self.assertEqual(author_count.appearing_last("oguz", ["a", "oguz", "b"]), 0)
         self.assertEqual(author_count.appearing_last("oguz",["a","b","c"]),0)
 
     def test_last_appearance_for_lists(self):
-        self.assertEqual(author_count.appearing_last_for_lists("oguz", [["oguz"], ["oguz", "a"], ["b", "a", "oguz"], ["a","b","c"]]), 2)
+        self.assertEqual(author_count.appearing_last_for_lists("oguz", [["oguz"], ["oguz", "a"], ["b", "a", "oguz"], ["a","b","c"]]), 1)
         self.assertEqual(author_count.appearing_last_for_lists("k", [["oguz"], ["oguz", "a"], ["b", "oguz", "a"], ["a","b","c"]]), 0)
-        self.assertEqual(author_count.appearing_last_for_lists("k", [["k"], ["oguz", "a"], ["b", "oguz", "a"], ["a","b","c"]]), 1)
+        self.assertEqual(author_count.appearing_last_for_lists("k", [["k"], ["oguz", "a"], ["b", "oguz", "a"], ["a","b","c"]]), 0)
 
-#<<<<<<< HEAD
     def test_author_last_name(self):
         self.assertEqual(author_lastname.get_author_last_name("Alessandro Artale"), "Artale")
         self.assertEqual(author_lastname.get_author_last_name("John H. Watson"), "Watson")
@@ -46,7 +45,7 @@ class TestAuthorCount(unittest.TestCase):
         self.assertEqual(author_lastname.get_last_name_first("Nostradamus"), "Nostradamus")
         self.assertEqual(author_lastname.get_last_name_first(""), -1)
 
-#=======
+
     def test_sole_author(self):
         self.assertEqual(author_count.appearing_sole("Marta", ["Marta"]), 1)
         self.assertEqual(author_count.appearing_sole("Marta",["Coco"]),0)
@@ -59,6 +58,6 @@ class TestAuthorCount(unittest.TestCase):
         self.assertEqual(author_count.appearing_sole_for_lists("k", [["oguz"], ["oguz", "a"], ["b", "oguz", "a"], ["a","b","c"]]), 0)
         self.assertEqual(author_count.appearing_sole_for_lists("k", [["k"], ["oguz", "a"], ["b", "oguz", "a"], ["a","b","c"], ["k"]]), 2)
         self.assertEqual(author_count.appearing_sole_for_lists("Coco",[["Coco"],["Coco"]]),2)
-#>>>>>>> master
+
 if __name__ == '__main__':
     unittest.main()
