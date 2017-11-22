@@ -159,7 +159,8 @@ def showAuthorStats():
     args = {"dataset":dataset, "id":"author_stats"}
     args["title"] = "Author Stats"
     author = str(request.args.get("author"))
-    allpubnumber,papernumber, journalnumber, booknumber, booksnumber,coauthornumber,fisrt,last = db.get_author_stats(author)
+    author_found, allpubnumber,papernumber, journalnumber, booknumber, booksnumber,coauthornumber,first,last = db.get_author_stats(author)
+    args["authorfound"]=author_found
     args["author"]=author
     args["allpubnumber"] = allpubnumber
     args["papernumber"] = papernumber
@@ -167,6 +168,6 @@ def showAuthorStats():
     args["booknumber"] = booknumber
     args["booksnumber"] = booksnumber
     args["coauthornumber"] = coauthornumber
-    args["fisrt"] = fisrt
+    args["first"] = first
     args["last"] = last
     return render_template("author_stats.html", args=args)

@@ -3,21 +3,30 @@
 {% block content %}
 
 <h1>{{ args.title }}</h1>
-<form action="/authorstats" method="get" data-ajax="false" onSubmit="validatefrom(this)">
+<form action="/authorstats" method="get" data-ajax="false" onSubmit="validateForm(this)">
     Author Name:<br>
     <input type="text" name="author">
     <input type="submit" value="Submit">
-    <h3> Stats for {{args.author}} </h3>
-The overall number of publications = {{args.allpubnumber}}<br>
-The number of conference papers = {{args.papernumber}}<br>
-The number of journal articles = {{args.journalnumber}}<br>
-The number of book chapters = {{args.booknumber}}<br>
-The number of books = {{args.booksnumber}}<br>
-The number of co-authors = {{args.coauthornumber}}<br>
-The number times(overall) an author appears first on a paper  = {{args.fisrt}}<br>
-The number times(overall) an author appears last on a paper = {{args.last}}<br>
-
 </form>
+
+{% if args.authorfound %}
+<h3> Stats for {{args.author}} </h3>
+
+Overall number of publications = {{args.allpubnumber}}<br>
+Number of conference papers = {{args.papernumber}}<br>
+Number of journal articles = {{args.journalnumber}}<br>
+Number of book chapters = {{args.booknumber}}<br>
+Number of books = {{args.booksnumber}}<br>
+Number of co-authors = {{args.coauthornumber}}<br>
+No. of times author appears first on a paper  = {{args.first}}<br>
+No. of times author appears last on a paper = {{args.last}}<br>
+{% elif args.author == "None" %}
+    
+{% else %}
+    <br> Author not found
+{% endif %}
+
+
 
 
 <script>
@@ -30,7 +39,7 @@ function validateForm(from){
   author = from["author"].value;
 
   if (author == ""){
-    alert("Please provide an Author");
+    alert("Please insert an author's name");
     return false;
   }
   return true;
