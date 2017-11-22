@@ -1,12 +1,15 @@
 import unittest
+from os import path
 
 from comp62521.statistics import author_count
 from comp62521.statistics import author_lastname
+from comp62521.database import database
 
 class TestAuthorCount(unittest.TestCase):
 
     def setUp(self):
-        pass
+        dir, _ = path.split(__file__)
+        self.data_dir = path.join(dir, "..", "data")
 
     def test_first_appearance(self):
         self.assertEqual(author_count.appearing_first("oguz", ["oguz"]), 0)
@@ -44,7 +47,10 @@ class TestAuthorCount(unittest.TestCase):
         self.assertEqual(author_lastname.get_last_name_first("William Sherlock Scott Holmes"), "Holmes, William Sherlock Scott")
         self.assertEqual(author_lastname.get_last_name_first("Nostradamus"), "Nostradamus")
         self.assertEqual(author_lastname.get_last_name_first(""), -1)
-
+        self.assertEqual(author_lastname.get_last_name_first(" "), -1)
+        self.assertEqual(author_lastname.get_last_name_first(" 326"), -1)
+        self.assertEqual(author_lastname.get_last_name_first("John 001 Doe"), "Doe, John")
+        self.assertEqual(author_lastname.get_last_name_first("John 001 Doe 1234"), "Doe, John")
 
     def test_sole_author(self):
         self.assertEqual(author_count.appearing_sole("Marta", ["Marta"]), 1)
@@ -58,6 +64,13 @@ class TestAuthorCount(unittest.TestCase):
         self.assertEqual(author_count.appearing_sole_for_lists("k", [["oguz"], ["oguz", "a"], ["b", "oguz", "a"], ["a","b","c"]]), 0)
         self.assertEqual(author_count.appearing_sole_for_lists("k", [["k"], ["oguz", "a"], ["b", "oguz", "a"], ["a","b","c"], ["k"]]), 2)
         self.assertEqual(author_count.appearing_sole_for_lists("Coco",[["Coco"],["Coco"]]),2)
+
+    def test_author_stats(self):
+        db = database.Database()
+        self.assertTrue(db.read(path.join(self.data_dir, "dblp_curated_sample.xml")))
+        self.assertEqual(db.get_author_stats('Stefano Ceri'),(True, 218, 100, 94, 6, 18, 230, 78, 25, u'Stefano Ceri'))
+        self.assertEqual(db.get_author_stats(''), (False, 0, 0, 0, 0, 0, 0, 0, 0, ''))
+        self.assertEqual(db.get_author_stats('Xianghe'), (False, 0, 0, 0, 0, 0, 0, 0, 0, ''))
 
 if __name__ == '__main__':
     unittest.main()
