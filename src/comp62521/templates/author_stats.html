@@ -3,14 +3,18 @@
 {% block content %}
 
 <h1>{{ args.title }}</h1>
-<form action="/authorstats" method="get" data-ajax="false" onSubmit="validateForm(this)">
-    Author Name:<br>
-    <input type="text" name="author">
-    <input type="submit" value="Submit">
-</form>
+<div>
+  <form class="form-inline" action="/authorstats" method="get" data-ajax="false" onSubmit="validateForm(this)">
+    <div class="form-group">
+      Author Name:<br>
+      <input class="form-control" type="text" name="author" placeholder="John Doe" >
+      <input type="submit" value="Submit" class="btn btn-primary">
+    </div>
+  </form>
+</div>
 
 {% if args.authorfound %}
-<h3> Stats for {{args.author}} </h3>
+<h3> Stats for {{args.authorname}} </h3>
 
 Overall number of publications = {{args.allpubnumber}}<br>
 Number of conference papers = {{args.papernumber}}<br>
@@ -21,29 +25,22 @@ Number of co-authors = {{args.coauthornumber}}<br>
 No. of times author appears first on a paper  = {{args.first}}<br>
 No. of times author appears last on a paper = {{args.last}}<br>
 {% elif args.author == "None" %}
-    
+
 {% else %}
     <br> Author not found
 {% endif %}
 
-
-
-
 <script>
-//  $(document).ready(function() {
-//    $('#table1').DataTable( {
-//        "order": [[ 0, "desc" ]]
-//    } );
-//  } );
-function validateForm(from){
-  author = from["author"].value;
 
-  if (author == ""){
-    alert("Please insert an author's name");
-    return false;
+  function validateForm(from){
+    author = from["author"].value;
+
+    if (author == ""){
+      alert("Please insert an author's name");
+      return false;
+    }
+    return true;
   }
-  return true;
-}
 </script>
 
 {% endblock %}

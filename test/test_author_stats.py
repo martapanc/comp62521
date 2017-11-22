@@ -12,9 +12,9 @@ class TestAuthorStats(unittest.TestCase):
     def test_author_stats(self):
         db = database.Database()
         self.assertTrue(db.read(path.join(self.data_dir, "dblp_curated_sample.xml")))
-        self.assertEqual(db.get_author_stats('Stefano Ceri'),(True, 218, 100, 94, 6, 18, 230, 86, 33))
-        self.assertEqual(db.get_author_stats(''), (False, 0, 0, 0, 0, 0, 0, 0, 0))
-        self.assertEqual(db.get_author_stats('Xianghe'), (False, 0, 0, 0, 0, 0, 0, 0, 0))
+        self.assertEqual(db.get_author_stats('Stefano Ceri'),(True, 218, 100, 94, 6, 18, 230, 86, 33, 'Stefano Ceri'))
+        self.assertEqual(db.get_author_stats(''), (False, 0, 0, 0, 0, 0, 0, 0, 0, ''))
+        self.assertEqual(db.get_author_stats('Xianghe'), (False, 0, 0, 0, 0, 0, 0, 0, 0, ''))
 
 
 if __name__ == '__main__':
