@@ -252,7 +252,7 @@ class Database:
                     astats2[a][0] = len(coauthors[a])
                 except:
                     astats2[a][0] = 0
-        data = [ [self.authors[i].name] + [sum(astats[i])] + astats[i] + astats2[i]
+        data = [ [ author_lastname.get_last_name_first(self.authors[i].name) ] + [sum(astats[i])] + astats[i] + astats2[i]
             for i in range(len(astats)) ]
         return (header, data)
 
@@ -293,14 +293,8 @@ class Database:
 
     def get_author_stats(self,author):
         coauthors = {}
-        papernumber=0
-        journalnumber=0
-        booknumber=0
-        booksnumber=0
-        allpubnumber=0
-        coauthornumber=0
-        fisrt=0
-        last=0
+        papernumber = journalnumber = booknumber = booksnumber = allpubnumber = coauthornumber = fisrt = last = 0
+        author_found = False
         astats = [[0, 0, 0, 0, 0, 0, 0, 0] for _ in range(len(self.authors))]
         # The overall number of publications,papers,articls,book chapters,books
         # The number of co-authors
@@ -332,7 +326,8 @@ class Database:
                 coauthornumber = data[i][5]
                 fisrt = data[i][6]
                 last = data[i][7]
-        return (allpubnumber,papernumber,journalnumber,booknumber,booksnumber,coauthornumber,fisrt,last)
+                author_found = True
+        return (author_found, allpubnumber,papernumber,journalnumber,booknumber,booksnumber,coauthornumber,fisrt,last)
 
     def get_average_authors_per_publication_by_year(self, av):
         header = ("Year", "Conference papers",
