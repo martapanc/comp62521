@@ -291,6 +291,12 @@ class Database:
                         astats[2] += author_count.appearing_sole(a, p.authors)
         return (astats)
 
+    def search_authors(self, author):
+        ordered_authors = []
+        
+        
+        return (ordered_authors)
+
     def get_author_stats(self,author):
         coauthors = {}
         papernumber = journalnumber = booknumber = booksnumber = allpubnumber = coauthornumber = first = last = 0

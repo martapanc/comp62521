@@ -157,5 +157,11 @@ class TestDatabase(unittest.TestCase):
         self.assertTrue(db.read(path.join(self.data_dir, "sprint-2-acceptance-4.xml")))
         self.assertEqual(db.get_authors_count_for_one_author("AUTHOR1", 2010, 2013, 4), [1, 0, 2])
 
+    def test_search_authors(self):
+        db = database.Database()
+        self.assertTrue(db.read(path.join(self.data_dir, "dblp_curated_sample.xml")))
+        self.assertEqual(db.search_authors("kell"), ["Douglas B. Kell", "Arthur M. Keller", "Simon J. Cockell", "Simon J. Gaskell", "Rizos Sakellariou"])
+        self.assertEqual(db.search_authors("pol"), ["Jeff Pollock", "Luigi Palopoli", "Paola Spoletini"])
+
 if __name__ == '__main__':
     unittest.main()
