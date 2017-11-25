@@ -292,8 +292,59 @@ class Database:
         return (astats)
 
     def search_authors(self, author):
+        authors = []
+        tmp_authors_1 = []
+        tmp_authors_2 = []
+        tmp_authors_3 = []
+        tmp_authors_4 = []
         ordered_authors = []
         
+        for a in self.authors:
+            if author.lower() in a.name.lower():
+                authors.append(a.name)
+
+        splitted_author = author.split()
+        
+        if len(splitted_author) == 1:
+            len_of_author = len(author)
+            for a in authors:
+                name_list = a.split()
+                if  ((len(name_list[-1]) >= len_of_author) and (author.lower() == name_list[-1][:len_of_author].lower())):
+                    tmp_authors_1.append(a)
+                elif ((len(name_list[0]) >= len_of_author) and (author.lower() == name_list[0][:len_of_author].lower())):
+                    tmp_authors_2.append(a)
+                else:
+                    if len(name_list) > 2:
+                        control = False
+                        for i in range (len(name_list) - 2):
+                            if (control == False):
+                                if ((len(name_list[i + 1]) >= len_of_author) and (author.lower() == name_list[i + 1][:len_of_author].lower())):
+                                    tmp_authors_3.append(a)
+                                    control = True
+                        if (control == False):
+                            tmp_authors_4.append(a)
+                    else:                       
+                        tmp_authors_4.append(a)
+
+            tmp_auth_1 = []
+            tmp_auth_2 = []
+            for a in tmp_authors_1:
+                name_list = a.split()
+                if(author.lower() == name_list[-1].lower()):
+                    tmp_auth_1.append(a)
+                else:
+                    tmp_auth_2.append(a)                   
+            tmp_authors_1 = sorted(tmp_auth_1, key=str.lower) + sorted(tmp_auth_2, key=lambda s: s.split()[-1])
+
+            tmp_authors_2 = sorted(tmp_authors_2, key=str.lower) 
+            tmp_authors_3 = sorted(tmp_authors_3, key=lambda s: s.split()[-1])
+            tmp_authors_4 = sorted(tmp_authors_4, key=lambda s: s.split()[-1])
+
+            ordered_authors = tmp_authors_1 + tmp_authors_2 + tmp_authors_3 + tmp_authors_4
+
+        else:
+            pass
+            #If there will be searches for whole names, that should be implemented here
         
         return (ordered_authors)
 

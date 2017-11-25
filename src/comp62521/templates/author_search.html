@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}{{ args.title }}{% endblock %}
+{% block content %}
+
+<h1>{{ args.title }}</h1>
+<div>
+  <form class="form-inline" action="/authorsearch" method="get" data-ajax="false" onSubmit="validateForm(this)">
+    <div class="form-group">
+      Author Name:<br>
+      <input class="form-control" type="text" name="author" placeholder="John Doe" >
+      <input type="submit" value="Submit" class="btn btn-primary">
+    </div>
+  </form>
+</div>
+
+<h3> Search results </h3>
+
+<table>
+  <thead>
+    <tr>
+        <th>Author Names</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for author_name in args.authors %}
+      <tr>
+          <td>{{ author_name }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<script>
+
+  function validateForm(from){
+    author = from["author"].value;
+
+    if (author == ""){
+      alert("Please insert an author's name");
+      return false;
+    }
+    return true;
+  }
+</script>
+
+{% endblock %}

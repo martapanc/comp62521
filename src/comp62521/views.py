@@ -172,3 +172,14 @@ def showAuthorStats():
     args["last"] = last
     args["authorname"] = author_name
     return render_template("author_stats.html", args=args)
+
+@app.route("/authorsearch")
+def showAuthorSearch():
+    dataset=app.config['DATASET']
+    db = app.config['DATABASE']
+    args = {"dataset":dataset, "id":"search_authors"}
+    args["title"] = "Author Search"
+    author = str(request.args.get("author"))
+    authors = db.search_authors(author)
+    args["authors"] = authors
+    return render_template("author_search.html", args=args)
