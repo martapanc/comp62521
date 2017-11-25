@@ -222,7 +222,7 @@ class Database:
             for a in p.authors:
                 astats[a][p.pub_type] += 1
 
-        data = [ [author_lastname.get_param_name(self.authors[i].name)] + astats[i] + [sum(astats[i])]
+        data = [ [self.authors[i].name] + [author_lastname.get_last_name_first(self.authors[i].name)] + astats[i] + [sum(astats[i])]
             for i in range(len(astats)) ]
         return (header, data)
 
@@ -270,7 +270,7 @@ class Database:
                     astats[a][1] += author_count.appearing_last(a, p.authors)
 
                     astats[a][2] += author_count.appearing_sole(a, p.authors)
-        data = [ [ author_lastname.get_last_name_first(self.authors[i].name) ] + astats[i]
+        data = [ [self.authors[i].name] + [ author_lastname.get_last_name_first(self.authors[i].name) ] + astats[i]
             for i in range(len(astats)) ]
         return (header, data)
 

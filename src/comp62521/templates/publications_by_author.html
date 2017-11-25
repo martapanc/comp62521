@@ -16,8 +16,12 @@
   <tbody>
   {% for row in args.data[1] %}
     <tr>
-    {% for data_item in row %}
-      <td>{{ data_item }}</td>
+    {% for data_item in row[1:7] %}
+        {% if row[1] == data_item %} <!-- Only Author column should be clickable -->
+          <td><a href="/authorstats?author={{ row[0] }}"> {{ data_item }}</a></td>
+        {% else %}
+          <td>{{ data_item }}</td>
+        {% endif %}
     {% endfor %}
     </tr>
   {% endfor %}
