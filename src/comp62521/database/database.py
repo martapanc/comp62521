@@ -379,8 +379,7 @@ class Database:
             ordered_authors = tmp_authors_1 + tmp_authors_2 + tmp_authors_3 + tmp_authors_4 + tmp_authors_5 + tmp_authors_6
 
         else:
-            pass
-            #If there will be searches for whole names, that should be implemented here
+            ordered_authors = sorted(authors, key=lambda s: s.split()[-1])
         
         return (ordered_authors)
 
