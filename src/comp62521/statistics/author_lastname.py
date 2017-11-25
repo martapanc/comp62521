@@ -22,3 +22,8 @@ def get_last_name_first(author):
                 else:
                     return new_author_items[-1].title()
     return -1
+
+def get_param_name(author):
+    if author != "":
+        return author.replace(" ", "+")
+    return -1

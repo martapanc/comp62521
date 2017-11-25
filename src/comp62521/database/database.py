@@ -222,7 +222,7 @@ class Database:
             for a in p.authors:
                 astats[a][p.pub_type] += 1
 
-        data = [ [author_lastname.get_last_name_first(self.authors[i].name)] + astats[i] + [sum(astats[i])]
+        data = [ [author_lastname.get_param_name(self.authors[i].name)] + astats[i] + [sum(astats[i])]
             for i in range(len(astats)) ]
         return (header, data)
 
@@ -268,13 +268,9 @@ class Database:
                 for a in p.authors:
                     astats[a][0] += author_count.appearing_first(a, p.authors)
                     astats[a][1] += author_count.appearing_last(a, p.authors)
-#<<<<<<< HEAD
 
-#        data = [ [ author_lastname.get_last_name_first(self.authors[i].name) ] + astats[i]
-#=======
                     astats[a][2] += author_count.appearing_sole(a, p.authors)
         data = [ [ author_lastname.get_last_name_first(self.authors[i].name) ] + astats[i]
-#>>>>>>> master
             for i in range(len(astats)) ]
         return (header, data)
 
@@ -298,13 +294,13 @@ class Database:
         tmp_authors_3 = []
         tmp_authors_4 = []
         ordered_authors = []
-        
+
         for a in self.authors:
             if author.lower() in a.name.lower():
                 authors.append(a.name)
 
         splitted_author = author.split()
-        
+
         if len(splitted_author) == 1:
             len_of_author = len(author)
             for a in authors:
@@ -323,7 +319,7 @@ class Database:
                                     control = True
                         if (control == False):
                             tmp_authors_4.append(a)
-                    else:                       
+                    else:
                         tmp_authors_4.append(a)
 
             tmp_auth_1 = []
@@ -333,10 +329,10 @@ class Database:
                 if(author.lower() == name_list[-1].lower()):
                     tmp_auth_1.append(a)
                 else:
-                    tmp_auth_2.append(a)                   
+                    tmp_auth_2.append(a)
             tmp_authors_1 = sorted(tmp_auth_1, key=str.lower) + sorted(tmp_auth_2, key=lambda s: s.split()[-1])
 
-            tmp_authors_2 = sorted(tmp_authors_2, key=str.lower) 
+            tmp_authors_2 = sorted(tmp_authors_2, key=str.lower)
             tmp_authors_3 = sorted(tmp_authors_3, key=lambda s: s.split()[-1])
             tmp_authors_4 = sorted(tmp_authors_4, key=lambda s: s.split()[-1])
 
@@ -345,7 +341,7 @@ class Database:
         else:
             pass
             #If there will be searches for whole names, that should be implemented here
-        
+
         return (ordered_authors)
 
     def get_author_stats(self,author):
