@@ -420,6 +420,41 @@ class Database:
         return (author_found, allpubnumber, papernumber, journalnumber, booknumber, booksnumber,
                     coauthornumber, first, last, author_name)
 
+    def get_author_stats_by_click(self,author):
+        coauthors = {}
+        author_name = ''
+        author_found = False
+        NoPublications = [0, 0, 0, 0, 0]
+        NoFirstAuthor = [0, 0, 0, 0, 0]
+        NoLastAuthor = [0, 0, 0, 0, 0]
+        NoSoleAuthor = [0, 0, 0, 0, 0]
+        NoCoAuthor = 0
+
+        for p in self.publications:
+            for a in p.authors:
+                if str(self.authors[a].name) == author:
+                    author_found = True
+                    author_name = self.authors[a].name
+                    NoPublications[p.pub_type + 1] += 1
+                    for a2 in p.authors:
+                        if a != a2:
+                            try:
+                                coauthors[a].add(a2)
+                            except KeyError:
+                                coauthors[a] = set([a2])
+                    NoCoAuthor = len(coauthors[a])
+                    NoFirstAuthor[p.pub_type + 1] += author_count.appearing_first(a, p.authors)
+                    NoLastAuthor[p.pub_type + 1] += author_count.appearing_last(a, p.authors)
+                    NoSoleAuthor[p.pub_type + 1] += author_count.appearing_sole(a, p.authors)
+
+                    NoPublications[0] = NoPublications[1] + NoPublications[2] + NoPublications[3] + NoPublications[4]
+                    NoFirstAuthor[0] = NoFirstAuthor[1] + NoFirstAuthor[2] + NoFirstAuthor[3] + NoFirstAuthor[4]
+                    NoLastAuthor[0] = NoLastAuthor[1] + NoLastAuthor[2] + NoLastAuthor[3] + NoLastAuthor[4]
+                    NoSoleAuthor[0] = NoSoleAuthor[1] + NoSoleAuthor[2] + NoSoleAuthor[3] + NoSoleAuthor[4]
+
+        return (author_found, NoPublications, NoFirstAuthor, NoLastAuthor, NoSoleAuthor, NoCoAuthor, author_name)
+
+
     def get_average_authors_per_publication_by_year(self, av):
         header = ("Year", "Conference papers",
             "Journals", "Books",
