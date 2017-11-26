@@ -76,6 +76,8 @@ class TestAuthorCount(unittest.TestCase):
         db = database.Database()
         self.assertTrue(db.read(path.join(self.data_dir, "dblp_curated_sample.xml")))
         self.assertEqual(db.get_author_stats_by_click('Stefano Ceri'),(True, [218, 100, 94, 6, 18], [78, 28, 43, 3, 4], [25, 10, 10, 0, 5], [8, 7, 0, 0, 1], 230, u'Stefano Ceri'))
+        self.assertEqual(db.get_author_stats_by_click(''), (False, [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], 0, ''))
+        self.assertEqual(db.get_author_stats_by_click('Xianghe'), (False, [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], 0, ''))
 
 if __name__ == '__main__':
     unittest.main()
