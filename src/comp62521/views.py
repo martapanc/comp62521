@@ -185,3 +185,22 @@ def showAuthorSearch():
     authors = db.search_authors(author)
     args["authors"] = authors
     return render_template("author_search.html", args=args)
+
+
+@app.route("/authorstatsbyclick")
+def showAuthorSearchByClick():
+    dataset=app.config['DATASET']
+    db = app.config['DATABASE']
+    args = {"dataset":dataset, "id":"author_stats_by_click"}
+    args["title"] = "Author Stats"
+    author = str(request.args.get("author"))
+    author_found, NoPublications, NoFirstAuthor, NoLastAuthor, NoSoleAuthor, NoCoAuthor, author_name = db.get_author_stats_by_click(author)
+    args["authorfound"]=author_found
+    args["author"]=author
+    args["NoPublications"] = NoPublications
+    args["NoFirstAuthor"] = NoFirstAuthor
+    args["NoLastAuthor"] = NoLastAuthor
+    args["NoSoleAuthor"] = NoSoleAuthor
+    args["NoCoAuthor"] = NoCoAuthor
+    args["authorname"] = author_name
+    return render_template("author_stats_by_click.html", args=args)

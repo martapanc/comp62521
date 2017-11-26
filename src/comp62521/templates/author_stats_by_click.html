@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}{{ args.title }}{% endblock %}
+{% block content %}
+
+<br>
+<h2> Stats for {{args.authorname}} </h2>
+<br>
+<h4> Number of publications </h4>
+<b>Overall:</b> {{args.NoPublications[0]}}&emsp;
+<b>Journal Articles:</b> {{args.NoPublications[1]}}&emsp;
+<b>Conference Papers:</b> {{args.NoPublications[2]}}&emsp;
+<b>Books:</b> {{args.NoPublications[3]}}&emsp;
+<b>Book Chapters:</b> {{args.NoPublications[4]}}&emsp;
+
+<h4> Number of times first author </h4>
+<b>Overall:</b> {{args.NoFirstAuthor[0]}}&emsp;
+<b>Journal Articles:</b> {{args.NoFirstAuthor[1]}}&emsp;
+<b>Conference Papers:</b> {{args.NoFirstAuthor[2]}}&emsp;
+<b>Books:</b> {{args.NoFirstAuthor[3]}}&emsp;
+<b>Book Chapters:</b> {{args.NoFirstAuthor[4]}}&emsp;
+
+<h4> Number of times last author </h4>
+<b>Overall:</b> {{args.NoLastAuthor[0]}}&emsp;
+<b>Journal Articles:</b> {{args.NoLastAuthor[1]}}&emsp;
+<b>Conference Papers:</b> {{args.NoLastAuthor[2]}}&emsp;
+<b>Books:</b> {{args.NoLastAuthor[3]}}&emsp;
+<b>Book Chapters:</b> {{args.NoLastAuthor[4]}}&emsp;
+
+<h4> Number of times sole author </h4>
+<b>Overall:</b> {{args.NoSoleAuthor[0]}}&emsp;
+<b>Journal Articles:</b> {{args.NoSoleAuthor[1]}}&emsp;
+<b>Conference Papers:</b> {{args.NoSoleAuthor[2]}}&emsp;
+<b>Books:</b> {{args.NoSoleAuthor[3]}}&emsp;
+<b>Book Chapters:</b> {{args.NoSoleAuthor[4]}}&emsp;
+
+<h4> Number of co-authors </h4>
+<b>Overall:</b> {{args.NoCoAuthor}}<br>
+
+{% endblock %}
