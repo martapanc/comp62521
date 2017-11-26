@@ -24,7 +24,7 @@
   <tbody>
     {% for author_name in args.authors %}
       <tr>
-          <td>{{ author_name }}</td>
+          <td><a a href="/authorstats?author={{ author_name }}">{{ author_name }}</a></td>
       </tr>
     {% endfor %}
   </tbody>
