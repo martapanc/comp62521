@@ -409,7 +409,7 @@ class Database:
         data = [ astats[i]
                 for i in range(len(astats))]
         for i in range(len(data)):
-            if author != "" and author.lower() in self.authors[i].name.lower():
+            if author != "None" and author.lower() in self.authors[i].name.lower():
                 allpubnumber = data[i][0]
                 papernumber = data[i][1]
                 journalnumber = data[i][2]
