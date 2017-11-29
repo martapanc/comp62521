@@ -213,7 +213,7 @@ class Database:
 
 
     def get_publications_by_author(self):
-        header = ("Author", "No. of conference papers",
+        header = ("", "Author", "No. of conference papers",
             "No. of journals", "No. of books",
             "No. of book chapers", "Total")
 
@@ -297,8 +297,8 @@ class Database:
         tmp_authors_6 = []
         ordered_authors = []
 
-        if(author == "None"):
-            return (ordered_authors)
+        if author == "None" or author == "":
+            return ordered_authors
 
         for a in self.authors:
             if author.lower() in a.name.lower():
@@ -409,7 +409,7 @@ class Database:
         data = [ astats[i]
                 for i in range(len(astats))]
         for i in range(len(data)):
-            if author != "None" and author.lower() in self.authors[i].name.lower():
+            if author != "None" and author != "" and author.lower() in self.authors[i].name.lower():
                 allpubnumber = data[i][0]
                 papernumber = data[i][1]
                 journalnumber = data[i][2]
