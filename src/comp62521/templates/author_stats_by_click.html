@@ -2,38 +2,166 @@
 {% block title %}{{ args.title }}{% endblock %}
 {% block content %}
 
-<br>
-<h2> Stats for {{args.authorname}} </h2>
-<br>
-<h4> Number of publications </h4>
-<b>Overall:</b> {{args.NoPublications[0]}}&emsp;
-<b>Journal Articles:</b> {{args.NoPublications[1]}}&emsp;
-<b>Conference Papers:</b> {{args.NoPublications[2]}}&emsp;
-<b>Books:</b> {{args.NoPublications[3]}}&emsp;
-<b>Book Chapters:</b> {{args.NoPublications[4]}}&emsp;
+<style>
+    .go-back-btn {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+    }
+</style>
 
-<h4> Number of times first author </h4>
-<b>Overall:</b> {{args.NoFirstAuthor[0]}}&emsp;
-<b>Journal Articles:</b> {{args.NoFirstAuthor[1]}}&emsp;
-<b>Conference Papers:</b> {{args.NoFirstAuthor[2]}}&emsp;
-<b>Books:</b> {{args.NoFirstAuthor[3]}}&emsp;
-<b>Book Chapters:</b> {{args.NoFirstAuthor[4]}}&emsp;
+    <br>
+    <h2> Stats for {{args.authorname}} </h2>
+    <div class="col-md-12">
+        <div class="col-md-12">
+            <h4> Number of publications </h4>
+            <table class="table table-striped display" >
+                <thead>
+                <tr>
+                    <th>Overall</th>
+                    <th>Journal Articles</th>
+                    <th>Conference Papers</th>
+                    <th>Books</th>
+                    <th>Book Chapters</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    {% for item in args.NoPublications %}
+                        <td>{{ item }} </td>
+                    {% endfor %}
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
-<h4> Number of times last author </h4>
-<b>Overall:</b> {{args.NoLastAuthor[0]}}&emsp;
-<b>Journal Articles:</b> {{args.NoLastAuthor[1]}}&emsp;
-<b>Conference Papers:</b> {{args.NoLastAuthor[2]}}&emsp;
-<b>Books:</b> {{args.NoLastAuthor[3]}}&emsp;
-<b>Book Chapters:</b> {{args.NoLastAuthor[4]}}&emsp;
+        <div class="col-md-6">
+            <h4> Number of times first author </h4>
+            <table class="table table-striped display" >
+                <thead>
+                <tr>
+                    <th>Overall</th>
+                    <th>Journal Articles</th>
+                    <th>Conference Papers</th>
+                    <th>Books</th>
+                    <th>Book Chapters</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    {% for item in args.NoFirstAuthor %}
+                        <td>{{ item }} </td>
+                    {% endfor %}
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
-<h4> Number of times sole author </h4>
-<b>Overall:</b> {{args.NoSoleAuthor[0]}}&emsp;
-<b>Journal Articles:</b> {{args.NoSoleAuthor[1]}}&emsp;
-<b>Conference Papers:</b> {{args.NoSoleAuthor[2]}}&emsp;
-<b>Books:</b> {{args.NoSoleAuthor[3]}}&emsp;
-<b>Book Chapters:</b> {{args.NoSoleAuthor[4]}}&emsp;
+        <div class="col-md-6">
+            <h4> Number of times last author </h4>
+            <table class="table table-striped display" >
+                <thead>
+                <tr>
+                    <th>Overall</th>
+                    <th>Journal Articles</th>
+                    <th>Conference Papers</th>
+                    <th>Books</th>
+                    <th>Book Chapters</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    {% for item in args.NoLastAuthor %}
+                        <td>{{ item }} </td>
+                    {% endfor %}
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
-<h4> Number of co-authors </h4>
-<b>Overall:</b> {{args.NoCoAuthor}}<br>
+        <div class="col-md-6">
+            <h4> Number of times sole author </h4>
+            <table class="table table-striped display" >
+                <thead>
+                <tr>
+                    <th>Overall</th>
+                    <th>Journal Articles</th>
+                    <th>Conference Papers</th>
+                    <th>Books</th>
+                    <th>Book Chapters</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    {% for item in args.NoSoleAuthor %}
+                        <td>{{ item }} </td>
+                    {% endfor %}
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-3">
+            <h4> Number of co-authors </h4>
+            <table class="table table-striped display" >
+                <thead>
+                <tr>
+                    <th><br>Overall</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ args.NoCoAuthor }} </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="col-md-3" style="margin-bottom: 20px">
+        <button class="btn btn-primary" onclick="goBack()">Go Back</button>
+    </div>
+
+
+    <div class="col-md-12">
+        <h4> Number of publications </h4>
+        <b>Overall:</b> {{args.NoPublications[0]}}&emsp;
+        <b>Journal Articles:</b> {{args.NoPublications[1]}}&emsp;
+        <b>Conference Papers:</b> {{args.NoPublications[2]}}&emsp;
+        <b>Books:</b> {{args.NoPublications[3]}}&emsp;
+        <b>Book Chapters:</b> {{args.NoPublications[4]}}&emsp;
+
+        <h4> Number of times first author </h4>
+        <b>Overall:</b> {{args.NoFirstAuthor[0]}}&emsp;
+        <b>Journal Articles:</b> {{args.NoFirstAuthor[1]}}&emsp;
+        <b>Conference Papers:</b> {{args.NoFirstAuthor[2]}}&emsp;
+        <b>Books:</b> {{args.NoFirstAuthor[3]}}&emsp;
+        <b>Book Chapters:</b> {{args.NoFirstAuthor[4]}}&emsp;
+
+        <h4> Number of times last author </h4>
+        <b>Overall:</b> {{args.NoLastAuthor[0]}}&emsp;
+        <b>Journal Articles:</b> {{args.NoLastAuthor[1]}}&emsp;
+        <b>Conference Papers:</b> {{args.NoLastAuthor[2]}}&emsp;
+        <b>Books:</b> {{args.NoLastAuthor[3]}}&emsp;
+        <b>Book Chapters:</b> {{args.NoLastAuthor[4]}}&emsp;
+
+        <h4> Number of times sole author </h4>
+        <b>Overall:</b> {{args.NoSoleAuthor[0]}}&emsp;
+        <b>Journal Articles:</b> {{args.NoSoleAuthor[1]}}&emsp;
+        <b>Conference Papers:</b> {{args.NoSoleAuthor[2]}}&emsp;
+        <b>Books:</b> {{args.NoSoleAuthor[3]}}&emsp;
+        <b>Book Chapters:</b> {{args.NoSoleAuthor[4]}}&emsp;
+
+        <h4> Number of co-authors </h4>
+        <b>Overall:</b> {{args.NoCoAuthor}}<br>
+    </div>
+
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 
 {% endblock %}
