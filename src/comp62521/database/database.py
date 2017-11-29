@@ -297,7 +297,7 @@ class Database:
         tmp_authors_6 = []
         ordered_authors = []
 
-        if(author == ""):
+        if(author == "None"):
             return (ordered_authors)
 
         for a in self.authors:
