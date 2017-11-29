@@ -163,5 +163,11 @@ class TestDatabase(unittest.TestCase):
         self.assertEqual(db.search_authors("kell"), ["Douglas B. Kell", "Arthur M. Keller", "Simon J. Cockell", "Simon J. Gaskell", "Rizos Sakellariou"])
         self.assertEqual(db.search_authors("pol"), ["Jeff Pollock", "Luigi Palopoli", "Paola Spoletini"])
 
+    def test_search_authors_2(self):
+        db = database.Database()
+        self.assertTrue(db.read(path.join(self.data_dir, "extended_author.xml")))
+        self.assertEqual(db.search_authors(""), [])
+        self.assertEqual(db.search_authors("sam"), ["Alice Sam", "Alice Sammer", "Sam Brian", "Samuel Brian", "Alice Sam Brian", "Alice Sammmer Brian", "Alice Alice Sam Brian", "Alice Alice Sammmer Brian", "Alice Alice Brian Sam Brian", "Alice Alice Brian Sammmer Brian", "Alice Esam"])
+
 if __name__ == '__main__':
     unittest.main()
