@@ -13,6 +13,7 @@
   </form>
 </div>
 
+{% if args.authors|length > 1 %}
 <h3> Search results </h3>
 
 <table>
@@ -29,6 +30,11 @@
     {% endfor %}
   </tbody>
 </table>
+{% elif args.authors|length == 1 and args.authors[0] != 'Luigi Iannone' %}
+<meta http-equiv="refresh" content="0; url=/authorstatsbyclick?author={{ args.authors[0] }}" />
+{% else%}
+<h3> No author found </h3>
+{% endif %}
 
 <script>
 

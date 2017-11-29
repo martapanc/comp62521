@@ -297,6 +297,9 @@ class Database:
         tmp_authors_6 = []
         ordered_authors = []
 
+        if(author == ""):
+            return (ordered_authors)
+
         for a in self.authors:
             if author.lower() in a.name.lower():
                 authors.append(a.name)
