@@ -445,7 +445,10 @@ class Database:
                                 coauthors[a].add(a2)
                             except KeyError:
                                 coauthors[a] = set([a2])
-                    NoCoAuthor = len(coauthors[a])
+                    try:
+                        NoCoAuthor = len(coauthors[a])
+                    except:
+                        NoCoAuthor = 0
                     NoFirstAuthor[p.pub_type + 1] += author_count.appearing_first(a, p.authors)
                     NoLastAuthor[p.pub_type + 1] += author_count.appearing_last(a, p.authors)
                     NoSoleAuthor[p.pub_type + 1] += author_count.appearing_sole(a, p.authors)
