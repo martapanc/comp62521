@@ -169,5 +169,10 @@ class TestDatabase(unittest.TestCase):
         self.assertEqual(db.search_authors(""), [])
         self.assertEqual(db.search_authors("sam"), ["Alice Sam", "Alice Sammer", "Sam Brian", "Samuel Brian", "Alice Sam Brian", "Alice Sammmer Brian", "Alice Alice Sam Brian", "Alice Alice Sammmer Brian", "Alice Alice Brian Sam Brian", "Alice Alice Brian Sammmer Brian", "Alice Esam"])
 
+    def test_get_degree_of_separation(self):
+        db = database.Database()
+        self.assertTrue(db.read(path.join(self.data_dir, "dblp_sorting_example.xml")))
+        self.assertEqual(db.get_degree_of_separation("AnHai Doan", "Pedro Domingos"), 0)
+
 if __name__ == '__main__':
     unittest.main()
