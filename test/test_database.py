@@ -172,7 +172,8 @@ class TestDatabase(unittest.TestCase):
     def test_get_degrees_of_separation(self):
         db = database.Database()
         self.assertTrue(db.read(path.join(self.data_dir, "dblp_sorting_example.xml")))
-        self.assertEqual(db.get_degree_of_separation("AnHai Doan", "Pedro Domingos"), 0)
+        self.assertEqual(db.get_degrees_of_separation("AnHai Doan", "Pedro Domingos"), 0)
+        self.assertEqual(db.get_degrees_of_separation("Natalya Fridman Noy", "Pedro Domingos"), 1)
 
 if __name__ == '__main__':
     unittest.main()
