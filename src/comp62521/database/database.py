@@ -614,8 +614,24 @@ class Database:
         return (nodes, links)
 
     def get_degrees_of_separation(self, author1, author2):
-        
-        return 0
+        coauthors = {}
+        list_of_coauthors_for_author1 = []
+        for p in self.publications:
+            for a in p.authors:
+                for a2 in p.authors:
+                    if a != a2:
+                        try:
+                            coauthors[self.authors[a].name].add(self.authors[a2].name)
+                        except KeyError:
+                            coauthors[self.authors[a].name] = set([self.authors[a2].name])
+        try:
+            list_of_coauthors_for_author1 = coauthors[author1]
+        except:
+            list_of_coauthors_for_author1 = []
+        if author2 in list_of_coauthors_for_author1:
+            return 0
+        else:
+            return 1
 
 class DocumentHandler(handler.ContentHandler):
     TITLE_TAGS = [ "sub", "sup", "i", "tt", "ref" ]
