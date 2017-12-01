@@ -1,6 +1,7 @@
 from comp62521 import app
 from comp62521.database import database
 from flask import (render_template, request)
+import json
 
 def format_data(data):
     fmt = "%.2f"
@@ -204,3 +205,21 @@ def showAuthorSearchByClick():
     args["NoCoAuthor"] = NoCoAuthor
     args["authorname"] = author_name
     return render_template("author_stats_by_click.html", args=args)
+
+
+@app.route("/all_authors_network")
+def showAllAuthorsNetwork():
+    dataset = app.config['DATASET']
+    db = app.config['DATABASE']
+    args = {"dataset": dataset, "id": "all_authors_network"}
+    args["title"] = "Network of all authors"
+    return render_template("all_authors_network.html", args=args)
+
+
+@app.route("/coauthors_network")
+def getCoauthorsNetwork():
+    db = app.config['DATABASE']
+#   PUB_TYPES = ["Conference Papers", "Journals", "Books", "Book Chapters", "All Publications"]
+    authors, coauthors = db.get_authors_for_nw()
+    data = {'authors': authors, 'coauthors': coauthors}
+    return json.dumps(data)

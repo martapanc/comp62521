@@ -91,6 +91,19 @@ class Database:
 
         return (header, data)
 
+
+    def get_authors_for_nw(self):
+        authors = {}
+        coauthors = []
+        for p in self.publications:
+            for a in p.authors:
+                authors[a] = self.authors[a].name
+                for a2 in p.authors:
+                    if a != a2 and not [a,a2] in coauthors and not [a2,a] in coauthors:
+                        coauthors.append([a,a2])
+        return authors, coauthors
+
+
     def get_average_authors_per_publication(self, av):
         header = ("Conference Paper", "Journal", "Book", "Book Chapter", "All Publications")
 
