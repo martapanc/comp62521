@@ -613,6 +613,10 @@ class Database:
                     links.add((a, a2))
         return (nodes, links)
 
+    def get_degrees_of_separation(self, author1, author2):
+        
+        return 0
+
 class DocumentHandler(handler.ContentHandler):
     TITLE_TAGS = [ "sub", "sup", "i", "tt", "ref" ]
     PUB_TYPE = {
