@@ -157,4 +157,15 @@
     <ee>http://doi.acm.org/10.1145/1041410.1041412</ee>
     <url>http://www.informatik.uni-trier.de/~ley/db/journals/sigmod/sigmod33.html#DoanNH04</url>
 </article>
+<article mdate="2012-09-19" key="journals/sigmod/DoanNH04">
+    <author>Justin Bieber</author>
+    <title>Introduction to the Thing.</title>
+    <pages>6-13</pages>
+    <year>2004</year>
+    <volume>33</volume>
+    <journal>SIGMOD Rec</journal>
+    <number>7</number>
+    <ee>http://doi.acm.org/10.1145/1041410.1041412</ee>
+    <url>http://www.informatik.uni-trier.de/~ley/db/journals/sigmod/sigmod33.html#DoanNH04</url>
+</article>
 </dblp>
