@@ -616,7 +616,6 @@ class Database:
     def get_degrees_of_separation(self, author1, author2):
         global checked_coauthors
         coauthors = {}
-        checked_authors = [author1]
         separation_list = []
         checked_coauthors = {}
         for p in self.publications:
@@ -639,7 +638,7 @@ class Database:
             else:
                 result = self.aux_func_deg_of_sep(author1, author2, coauthors, separation_list, -1)
                 if (result == 100000):
-                    return -1
+                    return 'X'
                 else:
                     return result               
 

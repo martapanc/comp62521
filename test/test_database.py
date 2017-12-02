@@ -183,7 +183,7 @@ class TestDatabase(unittest.TestCase):
         self.assertEqual(db.get_degrees_of_separation("Pedro Domingos", "Rafet Ongun"), 1)
         self.assertEqual(db.get_degrees_of_separation("Natalya Fridman Noy", "Rafet Ongun"), 3)
         self.assertEqual(db.get_degrees_of_separation("Natalya Fridman Noy", "Oguz Ongun"), 2)
-        self.assertEqual(db.get_degrees_of_separation("Natalya Fridman Noy", "Justin Bieber"), -1)
+        self.assertEqual(db.get_degrees_of_separation("Natalya Fridman Noy", "Justin Bieber"), 'X')
 
 if __name__ == '__main__':
     unittest.main()
