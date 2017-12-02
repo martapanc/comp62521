@@ -637,7 +637,11 @@ class Database:
             if len(list_of_coauthors_for_author1) == 0:
                 return -1
             else:
-                return self.aux_func_deg_of_sep(author1, author2, coauthors, separation_list, -1)
+                result = self.aux_func_deg_of_sep(author1, author2, coauthors, separation_list, -1)
+                if (result == 100000):
+                    return -1
+                else:
+                    return result               
 
     def aux_func_deg_of_sep(self, author1, author2, coauthors, separation_list, degree):
         global checked_coauthors
