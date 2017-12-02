@@ -20,7 +20,7 @@
 
         $.ajax({
             dataType: 'json',
-            url: '/coauthors_network',
+            url: '/coauthors_network?author={{"Carole A. Goble"}}',
             success: function(data, status) {
                 console.log("Data: " + data + "\nStatus: " + status);
 

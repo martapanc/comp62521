@@ -212,7 +212,7 @@ def showAllAuthorsNetwork():
     dataset = app.config['DATASET']
     db = app.config['DATABASE']
     args = {"dataset": dataset, "id": "all_authors_network"}
-    args["title"] = "Network of all authors"
+    args["title"] = "Network of one authors"
     return render_template("all_authors_network.html", args=args)
 
 
@@ -220,6 +220,7 @@ def showAllAuthorsNetwork():
 def getCoauthorsNetwork():
     db = app.config['DATABASE']
 #   PUB_TYPES = ["Conference Papers", "Journals", "Books", "Book Chapters", "All Publications"]
-    authors, coauthors = db.get_authors_for_nw()
+    author = str(request.args.get("author"))
+    authors, coauthors = db.get_authors_for_nw(author)
     data = {'authors': authors, 'coauthors': coauthors}
     return json.dumps(data)
