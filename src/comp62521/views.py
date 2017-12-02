@@ -223,3 +223,10 @@ def getCoauthorsNetwork():
     authors, coauthors = db.get_authors_for_nw()
     data = {'authors': authors, 'coauthors': coauthors}
     return json.dumps(data)
+
+@app.route("/two_authors_network")
+def getTwoAuthorsNetwork():
+    db = app.config['DATABASE']
+    authors, coauthors = db.get_2_authors_nw(8, 0)
+    data = {'authors': authors, 'coauthors': coauthors}
+    return json.dumps(data)

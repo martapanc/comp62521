@@ -55,6 +55,21 @@
             }
         });
 
+        $.ajax({
+            dataType: 'json',
+            url: '/two_authors_network',
+            success: function(data, status) {
+
+                nodesDS = []
+                edgesDS = []
+                authors = data['authors']
+                coauthors = data['coauthors']
+
+                console.log(authors)
+                console.log(coauthors)
+            }
+        });
+
     </script>
 
 {% endblock %}

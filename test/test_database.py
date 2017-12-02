@@ -184,6 +184,16 @@ class TestDatabase(unittest.TestCase):
         self.assertEqual(db.get_degrees_of_separation("Natalya Fridman Noy", "Rafet Ongun"), 3)
         self.assertEqual(db.get_degrees_of_separation("Natalya Fridman Noy", "Oguz Ongun"), 2)
         self.assertEqual(db.get_degrees_of_separation("Natalya Fridman Noy", "Justin Bieber"), 'X')
+        self.assertEqual(db.get_degrees_of_separation("Oguz Ongun", "Justin Bieber"), 'X')
+
+
+    def test_get_2_authors_nw(self):
+        db = database.Database()
+        self.assertTrue(db.read(path.join(self.data_dir, "dblp_sorting_example_copy.xml")))
+        self.assertEqual(db.get_2_authors_nw(0, 8), ({0: "Alon Y. Halevy", 8: "Justin Bieber"}, []))
+        self.assertEqual(db.get_2_authors_nw(1, 8), ({1: "AnHai Doan", 8: "Justin Bieber"}, []))
+        self.assertEqual(db.get_2_authors_nw(8, 1), ({1: "AnHai Doan", 8: "Justin Bieber"}, []))
+
 
 if __name__ == '__main__':
     unittest.main()
