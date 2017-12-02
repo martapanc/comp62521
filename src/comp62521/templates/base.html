@@ -31,6 +31,13 @@
         .panel-body { padding:0px; }
         .panel-body table tr td { padding-left: 15px }
         .panel-body .table {margin-bottom: 0px; }
+        .glyphicon.header-glyph {
+            color: white;
+        }
+
+        .menu-div {
+            padding-left: 0;
+        }
     </style>
 
 </head>
@@ -39,40 +46,41 @@
 <div class="container">
     <div id="page" class="col-md-12">
         <div id="header" class="col-md-12">
-
             <h1>COMP62521: {{ args.dataset }}</h1>
+        </div>
 
-            <div id="navigation">
+        <div id="navigation">
 
-                <div id="home-and-menu" class="hidden">
-                    <div class="dropdown">
+            <div id="home-and-menu" class="col-md-12 hidden">
+                <div class="dropdown">
 
-                        <a class="btn btn-info" href="/">Home</a>
+                    <a class="btn btn-info" href="/">
+                        <span class="glyphicon glyphicon-home text-primary header-glyph"></span>Home
+                    </a>
 
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            Dropdown
-                            <span class="caret"></span>
-                        </button>
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <span class="glyphicon glyphicon-menu-hamburger text-primary header-glyph"></span>
+                    </button>
 
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 
-                            <li><a href="/statisticsdetails/publication_summary">Publication Summary</a></li>
-                            <li><a href="/statisticsdetails/publication_year">Publications by Year</a></li>
-                            <li><a href="/averages">Average Data</a></li>
-                            <div class="dropdown-divider"></div>
-                            <li><a href="/statisticsdetails/publication_author">Publications by Author</a></li>
-                            <li><a href="/coauthors">Co-Authors</a></li>
-                            <li><a href="/authorcount">Number of Times Authors Appear First/Last or Sole on a Paper</a></li>
-                            <li><a href="/authorsearch">Author Search</a></li>
-                            <li><a href="/statisticsdetails/all_details_of_authors">All the Details of the Authors</a></li>
-                            <div class="dropdown-divider"></div>
-                            <li><a href="/all_authors_network">Network of all authors (tests)</a></li>
+                        <li><a href="/statisticsdetails/publication_summary">Publication Summary</a></li>
+                        <li><a href="/statisticsdetails/publication_year">Publications by Year</a></li>
+                        <li><a href="/averages">Average Data</a></li>
+                        <div class="dropdown-divider"></div>
+                        <li><a href="/statisticsdetails/publication_author">Publications by Author</a></li>
+                        <li><a href="/coauthors">Co-Authors</a></li>
+                        <li><a href="/authorcount">Number of Times Authors Appear First/Last or Sole on a Paper</a></li>
+                        <li><a href="/authorsearch">Author Search</a></li>
+                        <li><a href="/statisticsdetails/all_details_of_authors">All the Details of the Authors</a></li>
+                        <div class="dropdown-divider"></div>
+                        <li><a href="/all_authors_network">Network of all authors (tests)</a></li>
 
-                        </ul>
-                    </div>
+                    </ul>
                 </div>
             </div>
         </div>
+
 
         <div id="content" class="col-md-12">
             {% block content %}{% endblock %}
