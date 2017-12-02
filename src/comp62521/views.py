@@ -213,6 +213,8 @@ def showAllAuthorsNetwork():
     db = app.config['DATABASE']
     args = {"dataset": dataset, "id": "all_authors_network"}
     args["title"] = "Network of one authors"
+    author = str(request.args.get("author"))
+    args["author"] = author
     return render_template("all_authors_network.html", args=args)
 
 

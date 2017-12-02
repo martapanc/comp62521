@@ -101,14 +101,10 @@ class Database:
                 authors[a] = self.authors[a].name
                 if self.authors[a].name == author:
                     coauthors_list[a] = self.authors[a].name
-                    print("yes")
                     for a2 in p.authors:
                         if a != a2 and not [a, a2] in coauthors and not [a2, a] in coauthors:
                             coauthors.append([a, a2])
-                            print(a2)
                             coauthors_list[a2] = self.authors[a2].name
-        print(authors)
-        print(coauthors)
         return coauthors_list, coauthors
 
 
