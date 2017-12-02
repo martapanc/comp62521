@@ -614,9 +614,11 @@ class Database:
         return (nodes, links)
 
     def get_degrees_of_separation(self, author1, author2):
+        global checked_coauthors
         coauthors = {}
         checked_authors = [author1]
         separation_list = []
+        checked_coauthors = {}
         for p in self.publications:
             for a in p.authors:
                 for a2 in p.authors:
@@ -635,26 +637,36 @@ class Database:
             if len(list_of_coauthors_for_author1) == 0:
                 return -1
             else:
-                return self.aux_func_deg_of_sep(author1, author2, coauthors, checked_authors, separation_list, -1)
+                return self.aux_func_deg_of_sep(author1, author2, coauthors, separation_list, -1)
 
-    def aux_func_deg_of_sep(self, author1, author2, coauthors, checked_authors, separation_list, degree):
+    def aux_func_deg_of_sep(self, author1, author2, coauthors, separation_list, degree):
+        global checked_coauthors
         degree += 1
         try:
             list_of_coauthors_for_author1 = coauthors[author1]
         except:
             list_of_coauthors_for_author1 = []
         for a in list_of_coauthors_for_author1:
-            if a in checked_authors:
+            if a in checked_coauthors:
                 pass
             else:
-                checked_authors.append(a)
+                checked_coauthors[a] = degree
+        for a in list_of_coauthors_for_author1:
+            if a in checked_coauthors:
+                if checked_coauthors[a] >= degree:
+                    if author2 == a:
+                        sep_value = degree
+                    else:
+                        sep_value = self.aux_func_deg_of_sep(a, author2, coauthors, separation_list, degree)
+                    separation_list.append(sep_value)
+            else:
                 if author2 == a:
                     sep_value = degree
                 else:
-                    sep_value = self.aux_func_deg_of_sep(a, author2, coauthors, checked_authors, separation_list, degree)
+                    sep_value = self.aux_func_deg_of_sep(a, author2, coauthors, separation_list, degree)
                 separation_list.append(sep_value)
         if len(separation_list) == 0:
-            return 100
+            return 100000
         else:
             return min(separation_list)
             
