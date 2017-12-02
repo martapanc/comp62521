@@ -6,7 +6,7 @@
     <title>{% block title %}{% endblock %}</title>
 
     <link rel="shortcut icon" type="image/png" href="http://mumsthenerd.co.uk/wp-content/uploads/2015/03/favicon.ico"/>
-     <!-- Latest compiled and minified CSS -->
+    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -26,17 +26,51 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css"/>
 
+    <style>
+        .glyphicon { margin-right:10px; }
+        .panel-body { padding:0px; }
+        .panel-body table tr td { padding-left: 15px }
+        .panel-body .table {margin-bottom: 0px; }
+    </style>
+
 </head>
 
 <body>
 <div class="container">
-    <div id="page" class="col-md-10">
+    <div id="page" class="col-md-12">
         <div id="header" class="col-md-12">
 
             <h1>COMP62521: {{ args.dataset }}</h1>
 
             <div id="navigation">
-                <a class="btn btn-info" href="/">Home</a>
+
+                <div id="home-and-menu" class="hidden">
+                    <div class="dropdown">
+
+                        <a class="btn btn-info" href="/">Home</a>
+
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            Dropdown
+                            <span class="caret"></span>
+                        </button>
+
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+
+                            <li><a href="/statisticsdetails/publication_summary">Publication Summary</a></li>
+                            <li><a href="/statisticsdetails/publication_year">Publications by Year</a></li>
+                            <li><a href="/averages">Average Data</a></li>
+                            <div class="dropdown-divider"></div>
+                            <li><a href="/statisticsdetails/publication_author">Publications by Author</a></li>
+                            <li><a href="/coauthors">Co-Authors</a></li>
+                            <li><a href="/authorcount">Number of Times Authors Appear First/Last or Sole on a Paper</a></li>
+                            <li><a href="/authorsearch">Author Search</a></li>
+                            <li><a href="/statisticsdetails/all_details_of_authors">All the Details of the Authors</a></li>
+                            <div class="dropdown-divider"></div>
+                            <li><a href="/all_authors_network">Network of all authors (tests)</a></li>
+
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -50,16 +84,25 @@
 </body>
 
 <script>
-  $(document).ready(function() {
-    $('.sorted-table').DataTable( {
-        "order": [[ 0, "asc" ]], //Default sorting by first column
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]], //'Show X entries' option
-        "iDisplayLength": 25, //Default display length
-        "orderFixed": {
-          "post": [[ 0, 'asc' ]] //Always keep 1st column as secondary sorting criterion
-        }
+
+
+    $(document).ready(function() {
+        $('.sorted-table').DataTable( {
+            "order": [[ 0, "asc" ]], //Default sorting by first column
+            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]], //'Show X entries' option
+            "iDisplayLength": 25, //Default display length
+            "orderFixed": {
+                "post": [[ 0, 'asc' ]] //Always keep 1st column as secondary sorting criterion
+            }
+        } );
+
+        if (window.location.pathname != "/") {
+            $("#home-and-menu").removeClass("hidden");
+        };
+
     } );
-  } );
+
+
 </script>
 
 </html>

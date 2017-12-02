@@ -2,21 +2,134 @@
 {% block title %}Home{% endblock %}
 
 {% block head %}
-  {{ super() }}
+    {{ super() }}
 {% endblock %}
 
 {% block content %}
-<ul>
-  <li><a href="/statisticsdetails/publication_summary">Publication Summary</a></li>
-  <li><a href="/statisticsdetails/publication_author">Publications by Author</a></li>
-  <li><a href="/statisticsdetails/publication_year">Publications by Year</a></li>
-  <li><a href="/statisticsdetails/author_year">Authors by Year</a></li>
-  <li><a href="/averages">Average Data</a></li>
-  <li><a href="/coauthors">Co-Authors</a></li>
-  <li><a href="/authorcount">Number of Times Authors Appear First/Last or Sole on a Paper</a></li>
-  <li><a href="/authorstats">Author Stats</a></li>
-  <li><a href="/authorsearch">Author Search</a></li>
-  <li><a href="/statisticsdetails/all_details_of_authors">All the Details of the Authors</a></li>
-  <li><a href="/all_authors_network">Network of all authors (tests)</a></li>
-</ul>
+
+
+    <div class="container">
+    <div class="row">
+    <div class="col-sm-3 col-md-3">
+        <div class="panel-group" id="accordion">
+
+            <!-- General -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                            <span class="glyphicon glyphicon-folder-close"></span>General
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <table class="table">
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-pencil text-primary"></span><a href="/statisticsdetails/publication_summary">Publication Summary</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-flash text-success"></span><a href="/statisticsdetails/publication_year">Publications by Year</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-file text-info"></span><a href="/averages">Average Data</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Authors -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                            <span class="glyphicon glyphicon-th"></span>Authors
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <table class="table">
+                            <tr>
+                                <td>
+                                    <a href="/statisticsdetails/publication_author">Publications by Author</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="/coauthors">Co-Authors</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="/authorcount">Number of Times Authors Appear First/Last or Sole on a Paper</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="/authorsearch">Author Search</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="/statisticsdetails/all_details_of_authors">All the Details of the Authors</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Network -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                            <span class="glyphicon glyphicon-user"></span>Network
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <table class="table">
+                            <tr>
+                                <td>
+                                    <a href="/all_authors_network">Network of all authors (tests)</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="/all_authors_network">Network of two authors</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{#
+    <ul>
+        <li><a href="/statisticsdetails/publication_summary">Publication Summary</a></li>
+        <li><a href="/statisticsdetails/publication_author">Publications by Author</a></li>
+        <li><a href="/statisticsdetails/publication_year">Publications by Year</a></li>
+        <li><a href="/statisticsdetails/author_year">Authors by Year</a></li>
+        <li><a href="/averages">Average Data</a></li>
+        <li><a href="/coauthors">Co-Authors</a></li>
+        <li><a href="/authorcount">Number of Times Authors Appear First/Last or Sole on a Paper</a></li>
+        <li><a href="/authorstats">Author Stats</a></li>
+        <li><a href="/authorsearch">Author Search</a></li>
+        <li><a href="/statisticsdetails/all_details_of_authors">All the Details of the Authors</a></li>
+        <li><a href="/all_authors_network">Network of all authors (tests)</a></li>
+    </ul>#}
+
+
 {% endblock %}

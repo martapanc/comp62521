@@ -2,51 +2,51 @@
 {% block title %}{{ args.title }}{% endblock %}
 {% block content %}
 
-<h1>{{ args.title }}</h1>
-<div>
-  <form class="form-inline" action="/authorsearch" method="get" data-ajax="false" onSubmit="validateForm(this)">
-    <div class="form-group">
-      Author Name:<br>
-      <input class="form-control" type="text" name="author" placeholder="John Doe" >
-      <input type="submit" value="Submit" class="btn btn-primary">
+    <h1>{{ args.title }}</h1>
+    <div>
+        <form class="form-inline" action="/authorsearch" method="get" data-ajax="false" onSubmit="validateForm(this)">
+            <div class="form-group">
+                Author Name:<br>
+                <input class="form-control" type="text" name="author" placeholder="John Doe" >
+                <input type="submit" value="Submit" class="btn btn-primary">
+            </div>
+        </form>
     </div>
-  </form>
-</div>
 
-{% if args.authors|length > 1 %}
-<h3> Search results </h3>
+    {% if args.authors|length > 1 %}
+        <h3> Search results </h3>
 
-<table>
-  <thead>
-    <tr>
-        <th>Author Names</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for author_name in args.authors %}
-      <tr>
-          <td><a a href="/authorstatsbyclick?author={{ author_name }}">{{ author_name }}</a></td>
-      </tr>
-    {% endfor %}
-  </tbody>
-</table>
-{% elif args.authors|length == 1 %}
-  <meta http-equiv="refresh" content="0; url=/authorstatsbyclick?author={{ args.authors[0] }}" />
-{% else%}
-<h3> No author found </h3>
-{% endif %}
+        <table>
+            <thead>
+            <tr>
+                <th>Author Names</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for author_name in args.authors %}
+                <tr>
+                    <td><a a href="/authorstatsbyclick?author={{ author_name }}">{{ author_name }}</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% elif args.authors|length == 1 %}
+        <meta http-equiv="refresh" content="0; url=/authorstatsbyclick?author={{ args.authors[0] }}" />
+    {% else%}
+        <h3> No author found </h3>
+    {% endif %}
 
-<script>
+    <script>
 
-  function validateForm(from){
-    author = from["author"].value;
+        function validateForm(from){
+            author = from["author"].value;
 
-    if (author == ""){
-      alert("Please insert an author's name");
-      return false;
-    }
-    return true;
-  }
-</script>
+            if (author == ""){
+                alert("Please insert an author's name");
+                return false;
+            }
+            return true;
+        }
+    </script>
 
 {% endblock %}
