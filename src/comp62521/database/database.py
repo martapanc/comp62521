@@ -615,7 +615,8 @@ class Database:
 
     def get_degrees_of_separation(self, author1, author2):
         coauthors = {}
-        list_of_coauthors_for_author1 = []
+        checked_authors = [author1]
+        separation_list = []
         for p in self.publications:
             for a in p.authors:
                 for a2 in p.authors:
@@ -631,8 +632,32 @@ class Database:
         if author2 in list_of_coauthors_for_author1:
             return 0
         else:
-            return 1
+            if len(list_of_coauthors_for_author1) == 0:
+                return -1
+            else:
+                return self.aux_func_deg_of_sep(author1, author2, coauthors, checked_authors, separation_list, -1)
 
+    def aux_func_deg_of_sep(self, author1, author2, coauthors, checked_authors, separation_list, degree):
+        degree += 1
+        try:
+            list_of_coauthors_for_author1 = coauthors[author1]
+        except:
+            list_of_coauthors_for_author1 = []
+        for a in list_of_coauthors_for_author1:
+            if a in checked_authors:
+                pass
+            else:
+                checked_authors.append(a)
+                if author2 == a:
+                    sep_value = degree
+                else:
+                    sep_value = self.aux_func_deg_of_sep(a, author2, coauthors, checked_authors, separation_list, degree)
+                separation_list.append(sep_value)
+        if len(separation_list) == 0:
+            return 100
+        else:
+            return min(separation_list)
+            
 class DocumentHandler(handler.ContentHandler):
     TITLE_TAGS = [ "sub", "sup", "i", "tt", "ref" ]
     PUB_TYPE = {
