@@ -634,7 +634,7 @@ class Database:
             return 0
         else:
             if len(list_of_coauthors_for_author1) == 0:
-                return -1
+                return 'X'
             else:
                 result = self.aux_func_deg_of_sep(author1, author2, coauthors, separation_list, -1)
                 if (result == 100000):
