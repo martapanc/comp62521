@@ -196,6 +196,8 @@ class TestDatabase(unittest.TestCase):
         self.assertEqual(db.get_2_authors_nw(1, 8), ({1: "AnHai Doan", 8: "Justin Bieber"}, []))
         self.assertEqual(db.get_2_authors_nw(8, 1), ({1: "AnHai Doan", 8: "Justin Bieber"}, []))
         self.assertEqual(db.get_2_authors_nw(0, 0), ({0: "Alon Y. Halevy"}, []))
+        self.assertEqual(db.get_2_authors_nw(6, 5), ({0: "Alon Y. Halevy", 1: "AnHai Doan", 3: "Pedro Domingos", 5: "Natalya Fridman Noy", 6: "Oguz Ongun"}, [[6, 3], [3, 1], [1, 5], [3, 0], [0, 5]]))
+        self.assertEqual(db.get_2_authors_nw(5, 6), ({0: "Alon Y. Halevy", 1: "AnHai Doan", 3: "Pedro Domingos", 5: "Natalya Fridman Noy", 6: "Oguz Ongun"}, [[5, 1], [1, 3], [3, 6], [5, 0], [0, 3]]))
 
 
 if __name__ == '__main__':

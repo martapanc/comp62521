@@ -3,6 +3,7 @@ from comp62521.statistics import author_count
 from comp62521.statistics import author_lastname
 
 from operator import itemgetter
+from collections import defaultdict
 import itertools
 import numpy as np
 from xml.sax import handler, make_parser, SAXException
@@ -122,6 +123,16 @@ class Database:
         coauthors.sort(key=itemgetter(0,1))  # Sort edges by the first index
         return coauthors
 
+    def get_all_coauthors_graph(self):
+        coauthors = defaultdict(set)
+        for p in self.publications:
+            for a in p.authors:
+                #ca = []
+                for a2 in p.authors:
+                    if a != a2 and a2 not in coauthors[a]:
+                        coauthors[a].add(a2)
+                #coauthors[a] = ca
+        return coauthors
 
     def get_average_authors_per_publication(self, av):
         header = ("Conference Paper", "Journal", "Book", "Book Chapter", "All Publications")
@@ -659,7 +670,7 @@ class Database:
                 if (result == 100000):
                     return 'X'
                 else:
-                    return result               
+                    return result
 
     def aux_func_deg_of_sep(self, author1, author2, coauthors, separation_list, degree):
         global checked_coauthors
@@ -696,48 +707,76 @@ class Database:
 
         author1 = self.authors[a1].name
         author2 = self.authors[a2].name
-        allcoauthors = self.get_all_coauthors()
+        allcoauthors = self.get_all_coauthors_graph()
 
         authors = {a1: author1, a2: author2}  # The network graph will include at least the two authors' nodes
         coauthors = []
-        done_list = []
+        min_coauthors = []
         if self.get_degrees_of_separation(author1, author2) != "X":
-            coauthors = self.get2authors_aux(a1, a2, coauthors, allcoauthors, done_list)
+            coauthors = list(self.dfs_paths(allcoauthors, a1, a2))
 
-            #for i in allcoauthors:
-             #   if a1 == i[0]:
-              #      coauthors.append(i)
+            min_len = len(coauthors)
+            for path in coauthors:
+                if len(path) < min_len:
+                    min_len = len(path)
+            min_paths = []
+            for path in coauthors:
+                if len(path) == min_len:
+                    min_paths.append(path)
 
-        for i in coauthors:
-            authors[i[0]] = self.authors[i[0]].name
-            authors[i[1]] = self.authors[i[1]].name
+            for path in min_paths:
+                for i in range( 0, len(path[:-1]) ):
+                    if [path[i], path[i+1]] not in min_coauthors:
+                        min_coauthors.append([path[i], path[i+1]])
 
-        return authors, coauthors
+            for i in min_coauthors:
+                authors[i[0]] = self.authors[i[0]].name
+                authors[i[1]] = self.authors[i[1]].name
 
-    def get2authors_aux(self, a1, a2, coauthors, allcoauthors, done_list):
-        done_list.append([a1, a2])
+        return authors, min_coauthors
 
-        if [a1, a2] in allcoauthors:
-            coauthors.append([a1, a2])
-        else:
-            temp_coauthors = []
-            for i in allcoauthors:
-                index = i[0]
-                if index > a1:
-                    break
-                if index == a1:
-                    temp_coauthors.append(i)
+    def dfs_paths(self, graph, start, goal):
+        stack = [(start, [start])]
+        while stack:
+            (vertex, path) = stack.pop()
+            for next in graph[vertex] - set(path):
+                if next == goal:
+                    yield path + [next]
+                else:
+                    stack.append((next, path + [next]))
 
-            if [a1, a2] in temp_coauthors:
-                coauthors.append([a1, a2])
-            else:
-                for i in temp_coauthors:
-                    if [i[1], a2] not in done_list:
-                        self.get2authors_aux(i[1], a2, coauthors, allcoauthors, done_list)
+    # def get2authors_aux(self, a1, a2, coauthors, allcoauthors, done_list):
+    #     done_list.append([a1, a2])
+    #
+    #     if [a1, a2] in allcoauthors:
+    #         coauthors.append([a1, a2])
+    #         return
+    #     else:
+    #         temp_coauthors = []
+    #         for i in allcoauthors:
+    #             index = i[0]
+    #             if index > a1:
+    #                 break
+    #             if index == a1:
+    #                 temp_coauthors.append(i)
+    #         to_do = []
+    #         for edge in temp_coauthors:
+    #             if [edge[1], a2] not in allcoauthors:
+    #               a=1
+    #             else:
+    #                 coauthors.append[edge[1], a2]
+    #
+    #         #if [a1, a2] in temp_coauthors:
+    #          #   coauthors.append([a1, a2])
+    #         #else:
+    #          #   to_do= []
+    #           #  for i in temp_coauthors:
+    #
+    #                 #if [i[1], a2] not in done_list:
+    #                  #   self.get2authors_aux(i[1], a2, coauthors, allcoauthors, done_list)
+    #
+    #         return coauthors
 
-            return coauthors
-
-            
 class DocumentHandler(handler.ContentHandler):
     TITLE_TAGS = [ "sub", "sup", "i", "tt", "ref" ]
     PUB_TYPE = {
