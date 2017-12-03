@@ -226,3 +226,17 @@ def getCoauthorsNetwork():
     authors, coauthors = db.get_authors_for_nw(author)
     data = {'authors': authors, 'coauthors': coauthors}
     return json.dumps(data)
+
+@app.route("/degrees_of_separation")
+def showDegreeOfSeparation():
+    dataset=app.config['DATASET']
+    db = app.config['DATABASE']
+    args = {"dataset":dataset, "id":"author_stats"}
+    args["title"] = "Degrees of Separation"
+    author1 = str(request.args.get("author1"))
+    author2 = str(request.args.get("author2"))
+    degree = db.get_degrees_of_separation(author1,author2)
+    args["author1"]=author1
+    args["author2"]=author2
+    args["degree"] = degree
+    return render_template("degrees_of_separation.html", args=args)
