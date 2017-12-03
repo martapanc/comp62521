@@ -751,13 +751,14 @@ class Database:
 
     def get_single_author_network(self, author_name):
         a_id = -1
-        all = self.authors
         for a in self.authors:
             if a.name == author_name:
                 a_id = self.authors.index(a)
+        if a_id == -1:
+            return -1, []
         allcoauthors = self.get_all_coauthors()
         coauthors_edges = []
-        coauthors_nodes = {}
+        coauthors_nodes = {a_id: self.authors[a_id].name}
         for edge in allcoauthors:
             if a_id == edge[0] or a_id == edge[1]:
                 coauthors_edges.append(edge)

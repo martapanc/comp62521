@@ -4,7 +4,7 @@
 
     <h1>{{ args.title }}</h1>
     <div>
-        <form class="form-inline" action="/single_author_nw_ajax" method="get" onSubmit="validateForm(this)" id="single-author-form">
+        <form class="form-inline" action="/single_author_nw_ajax" method="get" id="single-author-form">
             <div class="author-nw-search">
                 <div class="form-group">
                     Author Name:<br>
@@ -35,8 +35,14 @@
                         nodesDS = []
                         edgesDS = []
                         authors = data['authors']
-                        if (jQuery.isEmptyObject(authors)) {
+                        authorName = data['author_name']
+                        if (authors == -1) {
                             alert("Author not found.")
+                            return false
+                        }
+                        if (authorName == ""){
+                            alert("Please insert an author's name");
+                            return false;
                         }
                         coauthors = data['coauthors']
                         console.log(coauthors)
@@ -72,7 +78,7 @@
 
         });
 
-        function validateForm(from){
+       {# function validateForm(from){
             author = from["author"].value;
 
             if (author == ""){
@@ -80,7 +86,7 @@
                 return false;
             }
             return true;
-        }
+        }#}
 
     </script>
 

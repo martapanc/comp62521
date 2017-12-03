@@ -206,28 +206,6 @@ def showAuthorSearchByClick():
     args["authorname"] = author_name
     return render_template("author_stats_by_click.html", args=args)
 
-#
-# @app.route("/authors_network")
-# def showAuthorsNetwork():
-#     dataset = app.config['DATASET']
-#     db = app.config['DATABASE']
-#     args = {"dataset": dataset, "id": "authors_network"}
-#     args["title"] = "Network of one author"
-#     author = str(request.args.get("author"))
-#     args["author"] = author
-#     nodes, edges = db.get_single_author_network(author)
-#     args["nodes"] = nodes
-#     args["edges"] = edges
-#     return render_template("single_author_network.html", args=args)
-#
-# @app.route("/coauthors_network")
-# def getCoauthorsNetwork():
-#     db = app.config['DATABASE']
-#     author = str(request.args.get("author"))
-#     authors, coauthors = db.get_authors_for_nw(author)
-#     data = {'authors': authors, 'coauthors': coauthors}
-#     return json.dumps(data)
-
 @app.route("/degrees_of_separation")
 def showDegreeOfSeparation():
     dataset=app.config['DATASET']
@@ -265,6 +243,6 @@ def showSingleAuthorNetworkAjax():
     db = app.config['DATABASE']
     author = str(request.args.get("author"))
     authors, coauthors = db.get_single_author_network(author)
-    data = {'authors': authors, 'coauthors': coauthors}
+    data = {'author_name': author, 'authors': authors, 'coauthors': coauthors}
     return json.dumps(data)
 
