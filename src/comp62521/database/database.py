@@ -110,28 +110,24 @@ class Database:
         coauthors.sort(key=itemgetter(0))  # Sort edges by the first index
         return authors, coauthors
 
-
-    def get_all_coauthors(self):
+    def get_all_coauthors(self):  # Returns a list of lists like [[0, 1], [3, 4], ...]
         coauthors = []
         for p in self.publications:
             for a in p.authors:
-
                 for a2 in p.authors:
                     if a != a2 and not [a, a2] in coauthors and not [a2, a] in coauthors:
                         coauthors.append([a2, a])
-                        coauthors.append([a, a2])
-        coauthors.sort(key=itemgetter(0,1))  # Sort edges by the first index
+                        #coauthors.append([a, a2])
+        coauthors.sort(key=itemgetter(0, 1))  # Sort edges by the first index
         return coauthors
 
-    def get_all_coauthors_graph(self):
+    def get_all_coauthors_graph(self):  # Returns a dictionary of sets, with the author indices as keys
         coauthors = defaultdict(set)
         for p in self.publications:
             for a in p.authors:
-                #ca = []
                 for a2 in p.authors:
                     if a != a2 and a2 not in coauthors[a]:
                         coauthors[a].add(a2)
-                #coauthors[a] = ca
         return coauthors
 
     def get_average_authors_per_publication(self, av):
@@ -745,37 +741,24 @@ class Database:
                 else:
                     stack.append((next, path + [next]))
 
-    # def get2authors_aux(self, a1, a2, coauthors, allcoauthors, done_list):
-    #     done_list.append([a1, a2])
-    #
-    #     if [a1, a2] in allcoauthors:
-    #         coauthors.append([a1, a2])
-    #         return
-    #     else:
-    #         temp_coauthors = []
-    #         for i in allcoauthors:
-    #             index = i[0]
-    #             if index > a1:
-    #                 break
-    #             if index == a1:
-    #                 temp_coauthors.append(i)
-    #         to_do = []
-    #         for edge in temp_coauthors:
-    #             if [edge[1], a2] not in allcoauthors:
-    #               a=1
-    #             else:
-    #                 coauthors.append[edge[1], a2]
-    #
-    #         #if [a1, a2] in temp_coauthors:
-    #          #   coauthors.append([a1, a2])
-    #         #else:
-    #          #   to_do= []
-    #           #  for i in temp_coauthors:
-    #
-    #                 #if [i[1], a2] not in done_list:
-    #                  #   self.get2authors_aux(i[1], a2, coauthors, allcoauthors, done_list)
-    #
-    #         return coauthors
+    def get_single_author_network(self, author_name):
+        a_id = -1
+        all = self.authors
+        for a in self.authors:
+            if a.name == author_name:
+                a_id = self.authors.index(a)
+        allcoauthors = self.get_all_coauthors()
+        coauthors_edges = []
+        coauthors_nodes = {}
+        for edge in allcoauthors:
+            if a_id == edge[0] or a_id == edge[1]:
+                coauthors_edges.append(edge)
+        for edge in coauthors_edges:
+            coauthors_nodes[edge[0]] = self.authors[edge[0]].name
+            coauthors_nodes[edge[1]] = self.authors[edge[1]].name
+
+        return coauthors_nodes, coauthors_edges
+
 
 class DocumentHandler(handler.ContentHandler):
     TITLE_TAGS = [ "sub", "sup", "i", "tt", "ref" ]
