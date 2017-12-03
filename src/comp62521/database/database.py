@@ -91,8 +91,7 @@ class Database:
 
         return (header, data)
 
-
-    def get_authors_for_nw(self,author):
+    def get_authors_for_nw(self, author):
         authors = {}
         coauthors = []
         coauthors_list = {}

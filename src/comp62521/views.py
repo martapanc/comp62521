@@ -227,14 +227,14 @@ def getCoauthorsNetwork():
     data = {'authors': authors, 'coauthors': coauthors}
     return json.dumps(data)
 
-<<<<<<< HEAD
+#<<<<<<< HEAD
 @app.route("/two_authors_network")
 def getTwoAuthorsNetwork():
     db = app.config['DATABASE']
     authors, coauthors = db.get_2_authors_nw(8, 0)
     data = {'authors': authors, 'coauthors': coauthors}
     return json.dumps(data)
-=======
+#=======
 @app.route("/degrees_of_separation")
 def showDegreeOfSeparation():
     dataset=app.config['DATASET']
@@ -248,4 +248,4 @@ def showDegreeOfSeparation():
     args["author2"]=author2
     args["degree"] = degree
     return render_template("degrees_of_separation.html", args=args)
->>>>>>> 18d90409fe420c91c531d197e4b255f348bb3e75
+#>>>>>>> 18d90409fe420c91c531d197e4b255f348bb3e75
