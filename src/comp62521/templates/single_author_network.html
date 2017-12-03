@@ -2,15 +2,6 @@
 {% block title %}{{ args.title }}{% endblock %}
 {% block content %}
 
-    <style type="text/css">
-        #vis-network-test {
-            width: 800px;
-            height: 600px;
-            border: 1px solid lightgray;
-            font: 24px arial black;
-        }
-    </style>
-
     <h1>{{ args.title }}</h1>
     <div>
         <form class="form-inline" action="/single_author_nw_ajax" method="get" onSubmit="validateForm(this)" id="single-author-form">
@@ -23,7 +14,7 @@
             </div>
         </form>
 
-        <div id="vis-network-test"></div>
+        <div id="single-author-network"></div>
 
     </div>
 
@@ -60,7 +51,7 @@
                         var nodes = new vis.DataSet(nodesDS);
                         var edges = new vis.DataSet(edgesDS);
 
-                        var container = document.getElementById('vis-network-test');
+                        var container = document.getElementById('single-author-network');
                         var data = { nodes: nodes, edges: edges };
                         var options = {
                             physics: {

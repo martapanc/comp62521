@@ -699,10 +699,18 @@ class Database:
         else:
             return min(separation_list)
 
-    def get_2_authors_nw(self, a1, a2):
+    def get_two_authors_network(self, author1, author2):
 
-        author1 = self.authors[a1].name
-        author2 = self.authors[a2].name
+        a1 = -1
+        a2 = -1
+        for a in self.authors:
+            if a.name == author1:
+                a1 = self.authors.index(a)
+            if a.name == author2:
+                a2 = self.authors.index(a)
+        if a1 == -1: return -1, []
+        elif a2 == -1: return -2, []
+
         allcoauthors = self.get_all_coauthors_graph()
 
         authors = {a1: author1, a2: author2}  # The network graph will include at least the two authors' nodes

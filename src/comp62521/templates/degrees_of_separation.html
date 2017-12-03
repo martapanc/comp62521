@@ -2,72 +2,148 @@
 {% block title %}{{ args.title }}{% endblock %}
 {% block content %}
 
-<h1>{{ args.title }}</h1>
-<br>
-<div class="col-md-12">
-    <form class="form-inline" method="get" data-ajax="false" onSubmit="validateForm(this)">
-        <div class="form-group">
-          <table>
-              <thead>
-              <tr>
-                  <th>Author1</th>
-                  <th>Author2</th>
-                  <th></th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                  <td><input class="form-control" type="text" name="author1" placeholder="John Doe" > </td>
-                  <td><input class="form-control" type="text" name="author2" placeholder="John Doe" > </td>
-                  <td><input type="submit" value="Submit" class="btn btn-primary"> </td>
-              </tr>
-              </tbody>
-          </table>
-        </div>
-    </form>
-</div>
+    <h1>{{ args.title }}</h1>
+    <br>
+    <div class="col-md-12" style="margin-bottom: 20px">
 
-<br><br>
+        <form class="form-inline" action="/two_authors_nw_ajax" method="get" id="two-authors-form">
+            <div class="author-nw-search">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="author1" placeholder="Author 1" >
+                    <input class="form-control" type="text" name="author2" placeholder="Author 2" >
+                    <input type="submit" value="Submit" class="btn btn-primary">
+                </div>
+            </div>
+        </form>
+    </div>
 
-{% if args.author1 %}
-<div class="col-md-12">
-  <table class="table table-striped display" >
-      <thead>
-      <tr>
-          <th>Author1</th>
-          <th>Author2</th>
-          <th>Degree of separation</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-          <td>{{ args.author1 }} </td>
-          <td>{{ args.author2 }} </td>
-          <td>{{ args.degree }} </td>
-      </tr>
-      </tbody>
-  </table>
-</div>
-{% else %}
-    <br> Author not found
-{% endif %}
 
-<script>
 
-    function validateForm(from){
-        author1 = from["author1"].value;
-        author2 = from["author2"].value;
+    {#    {% if args.author1 %}#}
+    <div class="col-md-6">
+        <table class="table table-striped display" >
+            <thead>
+            <tr>
+                <th>Author 1</th>
+                <th>Author 2</th>
+                <th>Degree(s) of separation</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td id="show-a1"> None </td>
+                <td id="show-a2"> None </td>
+                <td id="show-degree"> X </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
-        if (author1 == ""){
-            alert("Please insert author1's name");
-            return false;
-        }
-        if (author2 == ""){
-            alert("Please insert author2's name");
-            return false;
-        }
-        return true;
-    }
-</script>
+    <div class="col-md-8">
+        <h1 id="nw-title"> </h1>
+        <div id="two-authors-network"></div>
+    </div>
+
+    {#
+
+    {% else %}
+        <br> Author not found
+    {% endif %}#}
+
+    <script>
+
+        jQuery(document).ready(function(){
+
+            jQuery('#two-authors-form').submit( function() {
+
+                $.ajax({
+                    url     : $(this).attr('action'),
+                    type    : $(this).attr('method'),
+                    data    : $(this).serialize(),
+                    dataType: 'json',
+                    success : function(data, status) {
+
+                        nodesDS = []
+                        edgesDS = []
+                        authors = data['authors']
+                        coauthors = data['coauthors']
+                        a1 = data["author1"]
+                        a2 = data["author2"]
+                        degree = data["degree"]
+
+                        {#if (jQuery.isEmptyObject(authors)) {
+                            alert("Author not found.");
+                            return false
+                        }#}
+                        if (a1 == ""){
+                            alert("Please insert 1st author's name");
+                            return false;
+                        }
+                        if (a2 == ""){
+                            alert("Please insert 2nd author's name");
+                            return false;
+                        }
+                        if (authors == -1) {
+                            alert("Author 1 not found.");
+                            return false
+                        }
+                        if (authors == -2) {
+                            alert("Author 2 not found.");
+                            return false
+                        }
+
+                        $("#show-a1").html(a1);
+                        $("#show-a2").html(a2);
+                        $("#show-degree").html(degree);
+                        $("#nw-title").html("Authors Network");
+
+
+                        for (a in authors) {
+                            nodesDS.push({id: a, label: authors[a]});
+                        }
+
+                        for (var i = 0; i < coauthors.length; i++) {
+                            c = coauthors[i]
+                            edgesDS.push({from: c[0], to: c[1]})
+                        }
+                        var nodes = new vis.DataSet(nodesDS);
+                        var edges = new vis.DataSet(edgesDS);
+
+                        var container = document.getElementById('two-authors-network');
+                        var data = { nodes: nodes, edges: edges };
+                        var options = {
+                            physics: {
+                                barnesHut: {
+                                    avoidOverlap: 0.01
+                                }
+                            },
+                            layout: {
+                                improvedLayout: false
+                            }
+                        };
+                        var network = new vis.Network(container, data, options);
+
+                    }
+                });
+                return false;
+            });
+
+        });
+
+        {#function validateForm(from){
+            author1 = from["author1"].value;
+            author2 = from["author2"].value;
+
+            if (author1 == ""){
+                alert("Please insert author1's name");
+                return false;
+            }
+            if (author2 == ""){
+                alert("Please insert author2's name");
+                return false;
+            }
+            return true;
+        }#}
+    </script>
 
 {% endblock %}

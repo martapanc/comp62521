@@ -206,34 +206,27 @@ def showAuthorSearchByClick():
     args["authorname"] = author_name
     return render_template("author_stats_by_click.html", args=args)
 
-
-@app.route("/authors_network")
-def showAuthorsNetwork():
-    dataset = app.config['DATASET']
-    db = app.config['DATABASE']
-    args = {"dataset": dataset, "id": "authors_network"}
-    args["title"] = "Network of one author"
-    author = str(request.args.get("author"))
-    args["author"] = author
-    nodes, edges = db.get_single_author_network(author)
-    args["nodes"] = nodes
-    args["edges"] = edges
-    return render_template("single_author_network.html", args=args)
-
-@app.route("/coauthors_network")
-def getCoauthorsNetwork():
-    db = app.config['DATABASE']
-    author = str(request.args.get("author"))
-    authors, coauthors = db.get_authors_for_nw(author)
-    data = {'authors': authors, 'coauthors': coauthors}
-    return json.dumps(data)
-
-@app.route("/two_authors_network")
-def getTwoAuthorsNetwork():
-    db = app.config['DATABASE']
-    authors, coauthors = db.get_2_authors_nw(6, 5)
-    data = {'authors': authors, 'coauthors': coauthors}
-    return json.dumps(data)
+#
+# @app.route("/authors_network")
+# def showAuthorsNetwork():
+#     dataset = app.config['DATASET']
+#     db = app.config['DATABASE']
+#     args = {"dataset": dataset, "id": "authors_network"}
+#     args["title"] = "Network of one author"
+#     author = str(request.args.get("author"))
+#     args["author"] = author
+#     nodes, edges = db.get_single_author_network(author)
+#     args["nodes"] = nodes
+#     args["edges"] = edges
+#     return render_template("single_author_network.html", args=args)
+#
+# @app.route("/coauthors_network")
+# def getCoauthorsNetwork():
+#     db = app.config['DATABASE']
+#     author = str(request.args.get("author"))
+#     authors, coauthors = db.get_authors_for_nw(author)
+#     data = {'authors': authors, 'coauthors': coauthors}
+#     return json.dumps(data)
 
 @app.route("/degrees_of_separation")
 def showDegreeOfSeparation():
@@ -241,13 +234,23 @@ def showDegreeOfSeparation():
     db = app.config['DATABASE']
     args = {"dataset":dataset, "id":"author_stats"}
     args["title"] = "Degrees of Separation"
+    #author1 = str(request.args.get("author1"))
+    #author2 = str(request.args.get("author2"))
+    #degree = db.get_degrees_of_separation(author1,author2)
+    #args["author1"] = author1
+    #args["author2"] = author2
+    #args["degree"] = degree
+    return render_template("degrees_of_separation.html", args=args)
+
+@app.route("/two_authors_nw_ajax")
+def getTwoAuthorsNetwork():
+    db = app.config['DATABASE']
     author1 = str(request.args.get("author1"))
     author2 = str(request.args.get("author2"))
-    degree = db.get_degrees_of_separation(author1,author2)
-    args["author1"]=author1
-    args["author2"]=author2
-    args["degree"] = degree
-    return render_template("degrees_of_separation.html", args=args)
+    authors, coauthors = db.get_two_authors_network(author1, author2)
+    degree = db.get_degrees_of_separation(author1, author2)
+    data = {'author1': author1, 'author2': author2, 'authors': authors, 'coauthors': coauthors, 'degree': degree}
+    return json.dumps(data)
 
 @app.route("/single_author_network")
 def showSingleAuthorNetwork():
