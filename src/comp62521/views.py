@@ -207,34 +207,34 @@ def showAuthorSearchByClick():
     return render_template("author_stats_by_click.html", args=args)
 
 
-@app.route("/all_authors_network")
-def showAllAuthorsNetwork():
+@app.route("/authors_network")
+def showAuthorsNetwork():
     dataset = app.config['DATASET']
     db = app.config['DATABASE']
-    args = {"dataset": dataset, "id": "all_authors_network"}
-    args["title"] = "Network of one authors"
+    args = {"dataset": dataset, "id": "authors_network"}
+    args["title"] = "Network of one author"
     author = str(request.args.get("author"))
     args["author"] = author
-    return render_template("all_authors_network.html", args=args)
-
+    nodes, edges = db.get_single_author_network(author)
+    args["nodes"] = nodes
+    args["edges"] = edges
+    return render_template("single_author_network.html", args=args)
 
 @app.route("/coauthors_network")
 def getCoauthorsNetwork():
     db = app.config['DATABASE']
-#   PUB_TYPES = ["Conference Papers", "Journals", "Books", "Book Chapters", "All Publications"]
     author = str(request.args.get("author"))
     authors, coauthors = db.get_authors_for_nw(author)
     data = {'authors': authors, 'coauthors': coauthors}
     return json.dumps(data)
 
-#<<<<<<< HEAD
 @app.route("/two_authors_network")
 def getTwoAuthorsNetwork():
     db = app.config['DATABASE']
     authors, coauthors = db.get_2_authors_nw(6, 5)
     data = {'authors': authors, 'coauthors': coauthors}
     return json.dumps(data)
-#=======
+
 @app.route("/degrees_of_separation")
 def showDegreeOfSeparation():
     dataset=app.config['DATASET']
@@ -248,4 +248,20 @@ def showDegreeOfSeparation():
     args["author2"]=author2
     args["degree"] = degree
     return render_template("degrees_of_separation.html", args=args)
-#>>>>>>> 18d90409fe420c91c531d197e4b255f348bb3e75
+
+@app.route("/single_author_network")
+def showSingleAuthorNetwork():
+    dataset = app.config['DATASET']
+    db = app.config['DATABASE']
+    args = {"dataset": dataset, "id": "single_author_network"}
+    args["title"] = "Single author's Network"
+    return render_template("single_author_network.html", args=args)
+
+@app.route("/single_author_nw_ajax")
+def showSingleAuthorNetworkAjax():
+    db = app.config['DATABASE']
+    author = str(request.args.get("author"))
+    authors, coauthors = db.get_single_author_network(author)
+    data = {'authors': authors, 'coauthors': coauthors}
+    return json.dumps(data)
+
