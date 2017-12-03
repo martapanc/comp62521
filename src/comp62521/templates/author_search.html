@@ -7,7 +7,7 @@
         <form class="form-inline" action="/authorsearch" method="get" data-ajax="false" onSubmit="validateForm(this)">
             <div class="form-group">
                 Author Name:<br>
-                <input class="form-control" type="text" name="author" placeholder="John Doe" >
+                <input class="form-control" type="text" name="author" placeholder="John Doe" id="author-search" >
                 <input type="submit" value="Submit" class="btn btn-primary">
             </div>
         </form>
@@ -47,6 +47,25 @@
             }
             return true;
         }
+
+        $.ajax({
+            url: '/author_list',
+            type: 'get',
+            dataType: 'json',
+            success: function (data, status) {
+                author_list = data["author_list"];
+                console.log(author_list);
+                var opt = {
+                    data: author_list,
+                    list: {
+                        match: {
+                            enabled: true
+                        }
+                    }
+                };
+                $("#author-search").easyAutocomplete(opt);
+            }
+        });
     </script>
 
 {% endblock %}

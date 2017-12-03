@@ -8,7 +8,7 @@
             <div class="author-nw-search">
                 <div class="form-group">
                     Author Name:<br>
-                    <input class="form-control" type="text" name="author" placeholder="John Doe" >
+                    <input class="form-control" type="text" name="author" placeholder="John Doe" id="author">
                     <input type="submit" value="Submit" class="btn btn-primary">
                 </div>
             </div>
@@ -78,15 +78,24 @@
 
         });
 
-       {# function validateForm(from){
-            author = from["author"].value;
-
-            if (author == ""){
-                alert("Please insert an author's name");
-                return false;
+        $.ajax({
+            url: '/author_list',
+            type: 'get',
+            dataType: 'json',
+            success: function (data, status) {
+                author_list = data["author_list"];
+                console.log(author_list);
+                var opt = {
+                    data: author_list,
+                    list: {
+                        match: {
+                            enabled: true
+                        }
+                    }
+                };
+                $("#author").easyAutocomplete(opt);
             }
-            return true;
-        }#}
+        });
 
     </script>
 

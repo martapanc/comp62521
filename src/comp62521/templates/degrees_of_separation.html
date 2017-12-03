@@ -9,14 +9,14 @@
         <form class="form-inline" action="/two_authors_nw_ajax" method="get" id="two-authors-form">
             <div class="author-nw-search">
                 <div class="form-group">
-                    <input class="form-control" type="text" name="author1" placeholder="Author 1" >
-                    <input class="form-control" type="text" name="author2" placeholder="Author 2" >
+                    <input class="form-control" type="text" name="author1" placeholder="Author 1" id="a1">
+                    <input class="form-control" type="text" name="author2" placeholder="Author 2" id="a2">
                     <input type="submit" value="Submit" class="btn btn-primary">
                 </div>
             </div>
         </form>
     </div>
-    
+
     <div class="col-md-6">
         <table class="table table-striped display" >
             <thead>
@@ -46,7 +46,6 @@
         jQuery(document).ready(function(){
 
             jQuery('#two-authors-form').submit( function() {
-
                 $.ajax({
                     url     : $(this).attr('action'),
                     type    : $(this).attr('method'),
@@ -119,22 +118,26 @@
                 return false;
             });
 
+             $.ajax({
+                 url: '/author_list',
+                 type: 'get',
+                 dataType: 'json',
+                 success: function (data, status) {
+                     author_list = data["author_list"];
+                     var opt = {
+                         data: author_list,
+                         list: {
+                             match: {
+                                 enabled: true
+                             }
+                         }
+                     };
+                     $("#a1").easyAutocomplete(opt);
+                     $("#a2").easyAutocomplete(opt);
+                 }
+             });
+
         });
-
-        {#function validateForm(from){
-            author1 = from["author1"].value;
-            author2 = from["author2"].value;
-
-            if (author1 == ""){
-                alert("Please insert author1's name");
-                return false;
-            }
-            if (author2 == ""){
-                alert("Please insert author2's name");
-                return false;
-            }
-            return true;
-        }#}
     </script>
 
 {% endblock %}

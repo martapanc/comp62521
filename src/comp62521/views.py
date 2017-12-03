@@ -246,3 +246,9 @@ def showSingleAuthorNetworkAjax():
     data = {'author_name': author, 'authors': authors, 'coauthors': coauthors}
     return json.dumps(data)
 
+@app.route("/author_list")
+def getAuthorList():
+    db = app.config['DATABASE']
+    author_list = db.get_authors_as_list()
+    data = {'author_list': author_list}
+    return json.dumps(data)

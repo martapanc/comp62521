@@ -768,6 +768,12 @@ class Database:
 
         return coauthors_nodes, coauthors_edges
 
+    def get_authors_as_list(self):
+        author_list = []
+        for a in self.authors:
+            author_list.append(a.name)
+        return author_list
+
 
 class DocumentHandler(handler.ContentHandler):
     TITLE_TAGS = [ "sub", "sup", "i", "tt", "ref" ]
