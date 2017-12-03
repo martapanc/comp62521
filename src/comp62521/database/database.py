@@ -2,6 +2,7 @@ from comp62521.statistics import average
 from comp62521.statistics import author_count
 from comp62521.statistics import author_lastname
 
+from operator import itemgetter
 import itertools
 import numpy as np
 from xml.sax import handler, make_parser, SAXException
@@ -99,9 +100,25 @@ class Database:
             for a in p.authors:
                 authors[a] = self.authors[a].name
                 for a2 in p.authors:
-                    if a != a2 and not [a,a2] in coauthors and not [a2,a] in coauthors:
-                        coauthors.append([a,a2])
+                    if a != a2 and not [a, a2] in coauthors and not [a2, a] in coauthors:
+                        if a2 > a:  # Set all edges to have the smallest index first
+                            coauthors.append([a, a2])
+                        else:
+                            coauthors.append([a2, a])
+        coauthors.sort(key=itemgetter(0))  # Sort edges by the first index
         return authors, coauthors
+
+    def get_all_coauthors(self):
+        coauthors = []
+        for p in self.publications:
+            for a in p.authors:
+
+                for a2 in p.authors:
+                    if a != a2 and not [a, a2] in coauthors and not [a2, a] in coauthors:
+                        coauthors.append([a2, a])
+                        coauthors.append([a, a2])
+        coauthors.sort(key=itemgetter(0,1))  # Sort edges by the first index
+        return coauthors
 
 
     def get_average_authors_per_publication(self, av):
@@ -672,6 +689,52 @@ class Database:
             return 100000
         else:
             return min(separation_list)
+
+    def get_2_authors_nw(self, a1, a2):
+
+        author1 = self.authors[a1].name
+        author2 = self.authors[a2].name
+        allcoauthors = self.get_all_coauthors()
+
+        authors = {a1: author1, a2: author2}  # The network graph will include at least the two authors' nodes
+        coauthors = []
+        done_list = []
+        if self.get_degrees_of_separation(author1, author2) != "X":
+            coauthors = self.get2authors_aux(a1, a2, coauthors, allcoauthors, done_list)
+
+            #for i in allcoauthors:
+             #   if a1 == i[0]:
+              #      coauthors.append(i)
+
+        for i in coauthors:
+            authors[i[0]] = self.authors[i[0]].name
+            authors[i[1]] = self.authors[i[1]].name
+
+        return authors, coauthors
+
+    def get2authors_aux(self, a1, a2, coauthors, allcoauthors, done_list):
+        done_list.append([a1, a2])
+
+        if [a1, a2] in allcoauthors:
+            coauthors.append([a1, a2])
+        else:
+            temp_coauthors = []
+            for i in allcoauthors:
+                index = i[0]
+                if index > a1:
+                    break
+                if index == a1:
+                    temp_coauthors.append(i)
+
+            if [a1, a2] in temp_coauthors:
+                coauthors.append([a1, a2])
+            else:
+                for i in temp_coauthors:
+                    if [i[1], a2] not in done_list:
+                        self.get2authors_aux(i[1], a2, coauthors, allcoauthors, done_list)
+
+            return coauthors
+
             
 class DocumentHandler(handler.ContentHandler):
     TITLE_TAGS = [ "sub", "sup", "i", "tt", "ref" ]

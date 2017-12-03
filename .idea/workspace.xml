@@ -4,7 +4,6 @@
     <list default="true" id="ca27edc1-43aa-4fe8-af2c-9c241cea8af8" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/comp62521/database/database.py" afterPath="$PROJECT_DIR$/src/comp62521/database/database.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/comp62521/templates/all_authors_network.html" afterPath="$PROJECT_DIR$/src/comp62521/templates/all_authors_network.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/comp62521/views.py" afterPath="$PROJECT_DIR$/src/comp62521/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/test_database.py" afterPath="$PROJECT_DIR$/test/test_database.py" />
     </list>
@@ -17,7 +16,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/comp62521_2017_lab$Unittests_in_test_database_py.coverage" NAME="Unittests in test_database.py Coverage Results" MODIFIED="1512246608834" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
-    <SUITE FILE_PATH="coverage/comp62521_2017_lab$main.coverage" NAME="main Coverage Results" MODIFIED="1512246740447" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/comp62521_2017_lab$main.coverage" NAME="main Coverage Results" MODIFIED="1512260210902" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
   <component name="FileEditorManager">
     <leaf>
@@ -34,8 +33,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/comp62521/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="415">
-              <caret line="225" column="0" lean-forward="true" selection-start-line="225" selection-start-column="0" selection-end-line="225" selection-end-column="0" />
+            <state relative-caret-position="451">
+              <caret line="229" column="48" lean-forward="false" selection-start-line="229" selection-start-column="48" selection-end-line="229" selection-end-column="48" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -43,27 +42,46 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="database.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="database.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/comp62521/database/database.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="392">
-              <caret line="683" column="0" lean-forward="false" selection-start-line="683" selection-start-column="0" selection-end-line="683" selection-end-column="0" />
+            <state relative-caret-position="313">
+              <caret line="733" column="24" lean-forward="false" selection-start-line="733" selection-start-column="24" selection-end-line="733" selection-end-column="24" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
-                <marker date="1512247837052" expanded="true" signature="876:23609" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_database.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="test_database.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/test_database.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="189" column="26" lean-forward="false" selection-start-line="189" selection-start-column="26" selection-end-line="189" selection-end-column="26" />
+            <state relative-caret-position="451">
+              <caret line="193" column="66" lean-forward="false" selection-start-line="193" selection-start-column="66" selection-end-line="193" selection-end-column="66" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dblp_sorting_example.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/dblp_sorting_example.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="28" column="4" lean-forward="true" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dblp_sorting_example_copy.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/dblp_sorting_example_copy.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="28" column="35" lean-forward="true" selection-start-line="28" selection-start-column="35" selection-end-line="28" selection-end-column="35" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -101,6 +119,11 @@
       <find>get_coauthor</find>
       <find>degree</find>
       <find>get_authors</find>
+      <find>get_author</find>
+      <find>phili</find>
+      <find>philip</find>
+      <find>alon</find>
+      <find>get_all_co</find>
     </findStrings>
     <replaceStrings>
       <replace>Ciccio Pasticcio</replace>
@@ -119,14 +142,15 @@
         <option value="$PROJECT_DIR$/src/main.py" />
         <option value="$PROJECT_DIR$/src/comp62521/templates/author_stats_by_click.html" />
         <option value="$PROJECT_DIR$/src/comp62521/templates/publications_by_author.html" />
-        <option value="$PROJECT_DIR$/data/dblp_sorting_example.xml" />
         <option value="$PROJECT_DIR$/src/comp62521/templates/author_search.html" />
         <option value="$PROJECT_DIR$/src/comp62521/templates/statistics.html" />
         <option value="$PROJECT_DIR$/src/comp62521/templates/base.html" />
         <option value="$PROJECT_DIR$/src/comp62521/database/db.py" />
         <option value="$PROJECT_DIR$/src/comp62521/templates/all_authors_network.html" />
-        <option value="$PROJECT_DIR$/src/comp62521/views.py" />
         <option value="$PROJECT_DIR$/test/test_database.py" />
+        <option value="$PROJECT_DIR$/data/dblp_sorting_example.xml" />
+        <option value="$PROJECT_DIR$/data/dblp_sorting_example_copy.xml" />
+        <option value="$PROJECT_DIR$/src/comp62521/views.py" />
         <option value="$PROJECT_DIR$/src/comp62521/database/database.py" />
       </list>
     </option>
@@ -167,6 +191,11 @@
             <path>
               <item name="comp62521-2017-lab" type="b2602c69:ProjectViewProjectNode" />
               <item name="comp62521-2017-lab" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="comp62521-2017-lab" type="b2602c69:ProjectViewProjectNode" />
+              <item name="comp62521-2017-lab" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="comp62521-2017-lab" type="b2602c69:ProjectViewProjectNode" />
@@ -332,14 +361,14 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977304" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15487316" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15487316" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18157543" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21041666" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39919892" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39919892" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -378,6 +407,23 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/comp62521/database/database.py</url>
+          <line>720</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/comp62521/database/database.py</url>
+          <line>731</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/comp62521/database/database.py</url>
+          <line>717</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
@@ -385,18 +431,11 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="18" />
+      <option name="time" value="24" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/htmlcov/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/comp62521/templates/averages.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -624,13 +663,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/dblp_sorting_example.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1875">
-          <caret line="125" column="28" lean-forward="false" selection-start-line="125" selection-start-column="28" selection-end-line="125" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/htmlcov/bootstrap/bootstrap-grid.min.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="159">
@@ -693,9 +725,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="296">
           <caret line="138" column="37" lean-forward="false" selection-start-line="138" selection-start-column="37" selection-end-line="138" selection-end-column="37" />
-          <folding>
-            <element signature="e#1#17#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -739,16 +769,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/comp62521/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="225" column="0" lean-forward="true" selection-start-line="225" selection-start-column="0" selection-end-line="225" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/unittest/case.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
@@ -757,23 +777,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/comp62521/database/database.py">
+    <entry file="file://$PROJECT_DIR$/data/dblp_sorting_example.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="683" column="0" lean-forward="false" selection-start-line="683" selection-start-column="0" selection-end-line="683" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-            <marker date="1512247837052" expanded="true" signature="876:23609" ph="..." />
-          </folding>
+        <state relative-caret-position="216">
+          <caret line="28" column="4" lean-forward="true" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/dblp_sorting_example_copy.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="28" column="35" lean-forward="true" selection-start-line="28" selection-start-column="35" selection-end-line="28" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/test_database.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="189" column="26" lean-forward="false" selection-start-line="189" selection-start-column="26" selection-end-line="189" selection-end-column="26" />
+        <state relative-caret-position="451">
+          <caret line="193" column="66" lean-forward="false" selection-start-line="193" selection-start-column="66" selection-end-line="193" selection-end-column="66" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/comp62521/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="451">
+          <caret line="229" column="48" lean-forward="false" selection-start-line="229" selection-start-column="48" selection-end-line="229" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/comp62521/database/database.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="733" column="24" lean-forward="false" selection-start-line="733" selection-start-column="24" selection-end-line="733" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
           </folding>
         </state>
       </provider>

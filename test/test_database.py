@@ -185,6 +185,8 @@ class TestDatabase(unittest.TestCase):
         self.assertEqual(db.get_degrees_of_separation("Natalya Fridman Noy", "Oguz Ongun"), 2)
         self.assertEqual(db.get_degrees_of_separation("Natalya Fridman Noy", "Justin Bieber"), 'X')
         self.assertEqual(db.get_degrees_of_separation("Oguz Ongun", "Justin Bieber"), 'X')
+        self.assertEqual(db.get_degrees_of_separation("Justin Bieber", "Oguz Ongun"), 'X')
+        self.assertEqual(db.get_degrees_of_separation("Justin Bieber", "Justin Bieber"), 'X')
 
 
     def test_get_2_authors_nw(self):
@@ -193,6 +195,7 @@ class TestDatabase(unittest.TestCase):
         self.assertEqual(db.get_2_authors_nw(0, 8), ({0: "Alon Y. Halevy", 8: "Justin Bieber"}, []))
         self.assertEqual(db.get_2_authors_nw(1, 8), ({1: "AnHai Doan", 8: "Justin Bieber"}, []))
         self.assertEqual(db.get_2_authors_nw(8, 1), ({1: "AnHai Doan", 8: "Justin Bieber"}, []))
+        self.assertEqual(db.get_2_authors_nw(0, 0), ({0: "Alon Y. Halevy"}, []))
 
 
 if __name__ == '__main__':
