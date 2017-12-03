@@ -231,7 +231,7 @@ def getCoauthorsNetwork():
 @app.route("/two_authors_network")
 def getTwoAuthorsNetwork():
     db = app.config['DATABASE']
-    authors, coauthors = db.get_2_authors_nw(8, 0)
+    authors, coauthors = db.get_2_authors_nw(5,6)
     data = {'authors': authors, 'coauthors': coauthors}
     return json.dumps(data)
 #=======
