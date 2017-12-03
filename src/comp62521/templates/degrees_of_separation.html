@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}{{ args.title }}{% endblock %}
+{% block content %}
+
+<h1>{{ args.title }}</h1>
+<br>
+<div class="col-md-12">
+    <form class="form-inline" method="get" data-ajax="false" onSubmit="validateForm(this)">
+        <div class="form-group">
+          <table>
+              <thead>
+              <tr>
+                  <th>Author1</th>
+                  <th>Author2</th>
+                  <th></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                  <td><input class="form-control" type="text" name="author1" placeholder="John Doe" > </td>
+                  <td><input class="form-control" type="text" name="author2" placeholder="John Doe" > </td>
+                  <td><input type="submit" value="Submit" class="btn btn-primary"> </td>
+              </tr>
+              </tbody>
+          </table>
+        </div>
+    </form>
+</div>
+
+<br><br>
+
+{% if args.author1 %}
+<div class="col-md-12">
+  <table class="table table-striped display" >
+      <thead>
+      <tr>
+          <th>Author1</th>
+          <th>Author2</th>
+          <th>Degree of separation</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+          <td>{{ args.author1 }} </td>
+          <td>{{ args.author2 }} </td>
+          <td>{{ args.degree }} </td>
+      </tr>
+      </tbody>
+  </table>
+</div>
+{% else %}
+    <br> Author not found
+{% endif %}
+
+<script>
+
+    function validateForm(from){
+        author1 = from["author1"].value;
+        author2 = from["author2"].value;
+
+        if (author1 == ""){
+            alert("Please insert author1's name");
+            return false;
+        }
+        if (author2 == ""){
+            alert("Please insert author2's name");
+            return false;
+        }
+        return true;
+    }
+</script>
+
+{% endblock %}

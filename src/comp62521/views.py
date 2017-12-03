@@ -212,7 +212,9 @@ def showAllAuthorsNetwork():
     dataset = app.config['DATASET']
     db = app.config['DATABASE']
     args = {"dataset": dataset, "id": "all_authors_network"}
-    args["title"] = "Network of all authors"
+    args["title"] = "Network of one authors"
+    author = str(request.args.get("author"))
+    args["author"] = author
     return render_template("all_authors_network.html", args=args)
 
 
@@ -220,13 +222,30 @@ def showAllAuthorsNetwork():
 def getCoauthorsNetwork():
     db = app.config['DATABASE']
 #   PUB_TYPES = ["Conference Papers", "Journals", "Books", "Book Chapters", "All Publications"]
-    authors, coauthors = db.get_authors_for_nw()
+    author = str(request.args.get("author"))
+    authors, coauthors = db.get_authors_for_nw(author)
     data = {'authors': authors, 'coauthors': coauthors}
     return json.dumps(data)
 
+<<<<<<< HEAD
 @app.route("/two_authors_network")
 def getTwoAuthorsNetwork():
     db = app.config['DATABASE']
     authors, coauthors = db.get_2_authors_nw(8, 0)
     data = {'authors': authors, 'coauthors': coauthors}
     return json.dumps(data)
+=======
+@app.route("/degrees_of_separation")
+def showDegreeOfSeparation():
+    dataset=app.config['DATASET']
+    db = app.config['DATABASE']
+    args = {"dataset":dataset, "id":"author_stats"}
+    args["title"] = "Degrees of Separation"
+    author1 = str(request.args.get("author1"))
+    author2 = str(request.args.get("author2"))
+    degree = db.get_degrees_of_separation(author1,author2)
+    args["author1"]=author1
+    args["author2"]=author2
+    args["degree"] = degree
+    return render_template("degrees_of_separation.html", args=args)
+>>>>>>> 18d90409fe420c91c531d197e4b255f348bb3e75

@@ -12,6 +12,16 @@
     </style>
 
     <h1>{{ args.title }}</h1>
+     <div>
+  <form class="form-inline" action="/all_authors_network" method="get" data-ajax="false" onSubmit="validateForm(this)">
+    <div class="form-group">
+      Author Name:<br>
+      <input class="form-control" type="text" name="author" placeholder="John Doe" >
+      <input type="submit" value="Submit" class="btn btn-primary">
+    </div>
+  </form>
+</div>
+
     <div id="vis-network-test"></div>
 
 
@@ -20,7 +30,7 @@
 
         $.ajax({
             dataType: 'json',
-            url: '/coauthors_network',
+            url: '/coauthors_network?author={{args.author}}',
             success: function(data, status) {
                 console.log("Data: " + data + "\nStatus: " + status);
 
@@ -55,6 +65,7 @@
             }
         });
 
+<<<<<<< HEAD
         $.ajax({
             dataType: 'json',
             url: '/two_authors_network',
@@ -70,6 +81,17 @@
             }
         });
 
+=======
+         function validateForm(from){
+    author = from["author"].value;
+
+    if (author == ""){
+      alert("Please insert an author's name");
+      return false;
+    }
+    return true;
+  }
+>>>>>>> 18d90409fe420c91c531d197e4b255f348bb3e75
     </script>
 
 {% endblock %}
