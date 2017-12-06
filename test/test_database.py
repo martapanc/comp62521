@@ -189,15 +189,19 @@ class TestDatabase(unittest.TestCase):
         self.assertEqual(db.get_degrees_of_separation("Justin Bieber", "Justin Bieber"), 'X')
 
 
-    def test_get_2_authors_nw(self):
+    def test_get_two_authors_network(self):
         db = database.Database()
         self.assertTrue(db.read(path.join(self.data_dir, "dblp_sorting_example_copy.xml")))
-        self.assertEqual(db.get_2_authors_nw(0, 8), ({0: "Alon Y. Halevy", 8: "Justin Bieber"}, []))
-        self.assertEqual(db.get_2_authors_nw(1, 8), ({1: "AnHai Doan", 8: "Justin Bieber"}, []))
-        self.assertEqual(db.get_2_authors_nw(8, 1), ({1: "AnHai Doan", 8: "Justin Bieber"}, []))
-        self.assertEqual(db.get_2_authors_nw(0, 0), ({0: "Alon Y. Halevy"}, []))
-        self.assertEqual(db.get_2_authors_nw(6, 5), ({0: "Alon Y. Halevy", 1: "AnHai Doan", 3: "Pedro Domingos", 5: "Natalya Fridman Noy", 6: "Oguz Ongun"}, [[6, 3], [3, 1], [1, 5], [3, 0], [0, 5]]))
-        self.assertEqual(db.get_2_authors_nw(5, 6), ({0: "Alon Y. Halevy", 1: "AnHai Doan", 3: "Pedro Domingos", 5: "Natalya Fridman Noy", 6: "Oguz Ongun"}, [[5, 1], [1, 3], [3, 6], [5, 0], [0, 3]]))
+        self.assertEqual(db.get_two_authors_network("Alon Y. Halevy", "Justin Bieber"), ({0: "Alon Y. Halevy", 8: "Justin Bieber"}, []))
+        self.assertEqual(db.get_two_authors_network("AnHai Doan", "Justin Bieber"), ({1: "AnHai Doan", 8: "Justin Bieber"}, []))
+        self.assertEqual(db.get_two_authors_network("AnHai Doan", "Justin Bieber"), ({1: "AnHai Doan", 8: "Justin Bieber"}, []))
+        self.assertEqual(db.get_two_authors_network("Alon Y. Halevy", "Alon Y. Halevy"), ({0: "Alon Y. Halevy"}, []))
+        self.assertEqual(db.get_two_authors_network("Oguz Ongun", "Natalya Fridman Noy"), ({0: "Alon Y. Halevy", 1: "AnHai Doan", 3: "Pedro Domingos", 5: "Natalya Fridman Noy", 6: "Oguz Ongun"}, [[6, 3], [3, 1], [1, 5], [3, 0], [0, 5]]))
+        self.assertEqual(db.get_two_authors_network("Natalya Fridman Noy", "Oguz Ongun"), ({0: "Alon Y. Halevy", 1: "AnHai Doan", 3: "Pedro Domingos", 5: "Natalya Fridman Noy", 6: "Oguz Ongun"}, [[5, 1], [1, 3], [3, 6], [5, 0], [0, 3]]))
+
+        self.assertTrue(db.read(path.join(self.data_dir, "publications_small_sample.xml")))
+        self.assertEqual(db.get_two_authors_network("Sean Bechhofer", "Yeliz Yesilada"), ({0: "Sean Bechhofer", 1: "Yeliz Yesilada"}, [[0, 1]]))
+        self.assertEqual(db.get_two_authors_network("Sean Bechhofer", "Robert Stevens"), ({0: "Sean Bechhofer", 1: "Yeliz Yesilada", 3: "Carole A. Goble", 5: "Robert Stevens"}, [[0, 3], [3, 5], [0, 1], [1, 5]]))
 
 
 if __name__ == '__main__':
